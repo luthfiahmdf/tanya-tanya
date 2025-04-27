@@ -33,13 +33,5 @@ export const Overlay = () => {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id leo vitae urna commodo aliquam."
       }
     />
-  ) : (
-    <OverlayCard
-      username="Anomali"
-      variant="neutral"
-      question={
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id leo vitae urna commodo aliquam."
-      }
-    />
-  );
+  ) : null;
 };

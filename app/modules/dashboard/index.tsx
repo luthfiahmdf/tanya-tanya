@@ -64,12 +64,14 @@ export const ModuleDashboard = () => {
             <h2 className="text-xl md:text-2xl font-black mb-4 inline-block bg-[#FFD166] px-4 py-2 border-4 border-black transform -rotate-1">
               Pertanyaan Aktif
             </h2>
-            <Button onClick={handleCopy}>
-              {copied ? "Berhasil Disalin!" : "Link Overlay"}
-            </Button>
-            <Button onClick={handleCopyQna}>
-              {copiedQna ? "Berhasil Disalin!" : "Link Kirim Pesan"}
-            </Button>
+            <div className="flex md:flex-row flex-col gap-2">
+              <Button onClick={handleCopy}>
+                {copied ? "Berhasil Disalin!" : "Link Overlay"}
+              </Button>
+              <Button onClick={handleCopyQna}>
+                {copiedQna ? "Berhasil Disalin!" : "Link Kirim Pesan"}
+              </Button>
+            </div>
           </div>
           <div className="">
             <OverlayCard
