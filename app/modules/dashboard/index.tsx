@@ -24,7 +24,7 @@ export const ModuleDashboard = () => {
   };
   const handleCopy = async () => {
     await navigator.clipboard.writeText(
-      `${process.env.NEXT_PUBLIC_URL}${userData?.id}`
+      `${process.env.NEXT_PUBLIC_URL}overlay/${userData?.id}`
     );
     setCopied(true);
     setTimeout(() => {
