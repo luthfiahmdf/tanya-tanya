@@ -45,7 +45,6 @@ export interface CardProps
   question: string;
   createAt?: string;
   onShow?: () => void; // <-- tambahan
-  onDelete?: () => void; // <-- tambahan
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
@@ -60,7 +59,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       createAt,
       asChild = false,
       onShow, // <-- ambil props
-      onDelete, // <-- ambil props
+
       ...props
     },
     ref
@@ -80,9 +79,9 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
             </div>
             <div className="flex flex-row gap-2">
               <Button onClick={onShow}>Show</Button>
-              <Button onClick={onDelete} variant={"destructive"}>
+              {/* <Button onClick={onDelete} variant={"destructive"}>
                 Delete
-              </Button>
+              </Button> */}
             </div>
           </div>
           <div className="flex flex-col gap-4">

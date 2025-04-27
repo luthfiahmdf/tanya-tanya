@@ -17,6 +17,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRegister } from "./hook";
+import { toast } from "sonner";
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,9 +36,19 @@ export default function RegisterPage() {
       password: "",
     },
   });
-
+  const { mutate } = useRegister();
   const onSubmit = async (values: registerSchema) => {
-    console.log(values);
+    try {
+      mutate(values, {
+        onSuccess: () => {
+          form.reset();
+          toast.success("Register Berhasil");
+          window.location.href = "/login";
+        },
+      });
+    } catch (error) {
+      throw new Error(error as string);
+    }
   };
 
   return (
