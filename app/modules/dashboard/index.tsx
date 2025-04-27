@@ -1,5 +1,4 @@
 "use client";
-import { distanceDate } from "@/app/utils/distance-date";
 import { useGetQuestion, useGetUserMe, useUpdateActiveQuestion } from "./hook";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -12,7 +11,10 @@ import { OverlayCard } from "@/components/ui/overlay-card";
 export const ModuleDashboard = () => {
   const { data: userData } = useGetUserMe();
   const [copied, setCopied] = useState(false);
-  const { data: questionData } = useGetQuestion(userData?.username || "");
+  const [copiedQna, setCopiedQna] = useState(false);
+  const { data: questionData, refetch } = useGetQuestion(
+    userData?.username || ""
+  );
   const { data: activeQuestion, refetch: refetcOverlay } = useGetOverlay(
     userData?.id || ""
   );
@@ -22,15 +24,23 @@ export const ModuleDashboard = () => {
   };
   const handleCopy = async () => {
     await navigator.clipboard.writeText(
-      `https://lesgoo.vercel.app/overlay/${userData?.id}`
+      `${process.env.NEXT_PUBLIC_URL}${userData?.id}`
     );
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
     }, 2000);
   };
-  // console.log(questionData);
-  // console.log(userData);
+  const handleCopyQna = async () => {
+    await navigator.clipboard.writeText(
+      `${process.env.NEXT_PUBLIC_URL}tanyain/${userData?.username}`
+    );
+    setCopiedQna(true);
+    setTimeout(() => {
+      setCopiedQna(false);
+    }, 2000);
+  };
+
   const onShow = (questionId: TUpdateQuestion) => {
     try {
       mutate(questionId, {
@@ -49,16 +59,6 @@ export const ModuleDashboard = () => {
     <div className="min-h-screen bg-[#FFFAF0] flex flex-col  md:flex-row">
       <Sidebar username={userData?.username || ""} />
       <div className="w-full p-4">
-        {/* <div className="bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-          <h1 className="text-3xl font-black mb-4">Dashboard</h1>
-          <p className="mb-4">Selamat datang, {userData?.username} </p>
-          <p className="mb-4">
-            Ini adalah halaman dashboard Anda. Di sini Anda dapat melihat
-            pertanyaan dan jawaban Anda.
-          </p>
-        
-        </div> */}
-
         <section className="mb-8  ">
           <div className="flex gap-2">
             <h2 className="text-xl md:text-2xl font-black mb-4 inline-block bg-[#FFD166] px-4 py-2 border-4 border-black transform -rotate-1">
@@ -66,6 +66,9 @@ export const ModuleDashboard = () => {
             </h2>
             <Button onClick={handleCopy}>
               {copied ? "Berhasil Disalin!" : "Link Overlay"}
+            </Button>
+            <Button onClick={handleCopyQna}>
+              {copiedQna ? "Berhasil Disalin!" : "Link Kirim Pesan"}
             </Button>
           </div>
           <div className="">
@@ -80,10 +83,12 @@ export const ModuleDashboard = () => {
           </div>
         </section>
         <section>
-          <h2 className="text-xl md:text-2xl font-black mb-4 inline-block bg-[#118AB2] text-white px-4 py-2 border-4 border-black transform rotate-1">
-            Pertanyaan Terbaru
-          </h2>
-
+          <div className="flex flex-row items-center gap-2">
+            <h2 className="text-xl md:text-2xl font-black mb-4 inline-block bg-[#118AB2] text-white px-4 py-2 border-4 border-black transform rotate-1">
+              Pertanyaan Terbaru
+            </h2>
+            <Button onClick={() => refetch()}>Refresh</Button>
+          </div>
           <div className="">
             {questionData &&
               questionData.map((item, index) => (
@@ -99,7 +104,7 @@ export const ModuleDashboard = () => {
                     })
                   }
                   // size="sm"
-                  createAt={distanceDate(item.createAt)}
+                  // createAt={distanceDate(item.createAt)}
                 />
               ))}
           </div>
