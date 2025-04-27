@@ -19,7 +19,7 @@ const cardVariants = cva(
           "text-main-foreground bg-main border-border hover:translate-x-reverseBoxShadowX hover:translate-y-reverseBoxShadowY hover:shadow-shadow",
       },
       size: {
-        default: "max-w-4xl",
+        default: "max-w-xl",
         sm: "max-w-md",
         lg: "max-w-6xl",
       },
