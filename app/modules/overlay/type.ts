@@ -3,5 +3,5 @@ export type TActiveOverlay = {
   userId: string;
   name: string;
   question: string;
-  updateAt: string;
+  createdAt: string;
 };

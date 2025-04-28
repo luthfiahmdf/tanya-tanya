@@ -1,8 +1,9 @@
 "use client";
 import { useParams } from "next/navigation";
 import { useGetOverlay } from "./hook";
-import { OverlayCard } from "@/components/ui/overlay-card";
 import { useEffect } from "react";
+import { ActiveQuestions } from "@/components/ui/active-question";
+import { distanceDate } from "@/app/utils/distance-date";
 
 export const Overlay = () => {
   const params = useParams<{ username: string }>();
@@ -18,13 +19,6 @@ export const Overlay = () => {
   }, [refetch]);
   console.log(data);
   return data ? (
-    <OverlayCard
-      username={data?.name || "Anomali"}
-      variant="neutral"
-      question={
-        data?.question ||
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id leo vitae urna commodo aliquam."
-      }
-    />
+    <ActiveQuestions overlay name={data.name} question={data.question} createdAt={distanceDate(data.createdAt)} />
   ) : null;
 };
