@@ -45,3 +45,17 @@
   --font-weight-base: 500;
   --font-weight-heading: 700;
 }
+
+@keyframes toastProgress {
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 0%;
+  }
+}
+
+.animate-toastProgress {
+  animation: toastProgress 2s linear forwards;
+}

@@ -17,12 +17,15 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCreateQuestion } from "./hook";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { useState } from "react";
+import { useToast } from "@/components/ui/toast";
 
 export default function QnaModule() {
   const params = useParams<{ username: string }>();
   const { mutate } = useCreateQuestion(params.username);
-
+  const [send, onSend] = useState(false)
+  const { addToast } = useToast()
   const questionSchema = z.object({
     name: z.string().max(20, { message: "Maksimal 20 karakter" }).optional(),
     question: z
@@ -47,12 +50,15 @@ export default function QnaModule() {
     try {
       mutate(values, {
         onSuccess: () => {
+          onSend(false)
           form.reset();
-          toast(`Lesgoo kamu berhasil kirim pertanyaan ke ${params.username}`);
+          addToast(`Pesannya udah dikirim yaa..`, "success")
+
         },
         onError: () => {
-          toast.error(
-            `Yaaaah kamu gagal kirim pertanyaan ke ${params.username}`
+          onSend(false)
+          addToast(
+            `Yaaaah kamu gagal kirim pesannya`, "error"
           );
         },
       });
@@ -68,7 +74,6 @@ export default function QnaModule() {
           <Link href="/" className="flex items-center gap-2">
             <MessageCircle className="h-8 w-8" />
             <h1 className="text-2xl font-black">TANYA-TANYA</h1>
-            {/* <Button onClick={() => toto}>tes sooner</Button> */}
           </Link>
         </div>
       </header>
@@ -84,6 +89,11 @@ export default function QnaModule() {
                 </h1>
               </div>
 
+              <Button
+                onClick={() => addToast("Pesannya Udah dikirim yaa..", "success")}
+              >
+                Show Toast
+              </Button>
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
@@ -100,9 +110,8 @@ export default function QnaModule() {
                           <Input
                             placeholder="Masukkan nama Anda (opsional)"
                             disabled={form.formState.isSubmitting}
-                            className={`w-full p-3 border-4 border-black focus:outline-none focus:ring-2 focus:ring-[#118AB2] h-16 rounded-[0px] ${
-                              form.formState.errors.name ? "border-red-500" : ""
-                            }`}
+                            className={`w-full p-3 border-4 border-black focus:outline-none focus:ring-2 focus:ring-[#118AB2] h-16 rounded-[0px] ${form.formState.errors.name ? "border-red-500" : ""
+                              }`}
                             {...field}
                           />
                         </FormControl>
@@ -122,11 +131,10 @@ export default function QnaModule() {
                           <Textarea
                             placeholder="Masukkan pertanyaan Anda (maksimal 160 karakter)"
                             disabled={form.formState.isSubmitting}
-                            className={`w-full p-3 border-4 border-black focus:outline-none focus:ring-2 focus:ring-[#118AB2] h-56 rounded-[0px] ${
-                              form.formState.errors.question
-                                ? "border-red-500"
-                                : ""
-                            }`}
+                            className={`w-full p-3 border-4 border-black focus:outline-none focus:ring-2 focus:ring-[#118AB2] h-56 rounded-[0px] ${form.formState.errors.question
+                              ? "border-red-500"
+                              : ""
+                              }`}
                             {...field}
                           />
                         </FormControl>
@@ -136,6 +144,32 @@ export default function QnaModule() {
                   />
 
                   {/* Submit Button */}
+
+
+                  <Dialog open={send} onOpenChange={onSend} >
+                    <DialogTrigger asChild>
+                      <Button className="w-full h-16 text-black font-bold text-lg">Kirim Pesan</Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[425px]">
+                      <DialogHeader>
+                        <DialogTitle>Kirim Pesan</DialogTitle>
+                        <DialogDescription>
+                          Yakin nih mau dikirim pesannya ?
+                        </DialogDescription>
+                      </DialogHeader>
+
+                      <DialogFooter className="flex flex-row">
+                        <DialogClose asChild>
+                          <Button variant="neutral" className="w-full">Gajadi</Button>
+                        </DialogClose>
+                        <Button type="submit" className="w-full" onClick={() => {
+                          onSend(false)
+                          form.handleSubmit(onSubmit)()
+                        }}>Kirim</Button>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+
                   <Button
                     type="submit"
                     disabled={form.formState.isSubmitting}
