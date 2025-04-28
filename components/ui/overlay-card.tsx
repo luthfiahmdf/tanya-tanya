@@ -37,7 +37,7 @@ const cardVariants = cva(
 );
 export interface CardProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof cardVariants> {
+  VariantProps<typeof cardVariants> {
   asChild?: boolean;
   username: string;
   question: string;
@@ -62,10 +62,10 @@ const OverlayCard = React.forwardRef<HTMLDivElement, CardProps>(
     const Comp = asChild ? Slot : "div";
 
     return (
-      <div className={cn("mx-auto m-5", size && cardVariants({ size }))}>
+      <div className={cn("w-full ",)}>
         <Comp
           ref={ref}
-          className={cn(cardVariants({ variant, shadow }), className)}
+          className={cn(cardVariants({ variant, size, shadow }), className)}
           {...props}
         >
           <div className="flex flex-row items-center gap-4 mb-2">

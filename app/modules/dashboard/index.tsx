@@ -4,10 +4,11 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useGetOverlay } from "../overlay/hook";
-import { Sidebar } from "@/components/sidebar/sidebar";
 import { TUpdateQuestion } from "./api";
-import { OverlayCard } from "@/components/ui/overlay-card";
 import { distanceDate } from "@/app/utils/distance-date";
+import { StatCard } from "@/components/ui/card-stats";
+import { ActiveQuestions } from "@/components/ui/active-question";
+import { Blocks, Mail, MailQuestion } from "lucide-react";
 
 export const ModuleDashboard = () => {
   const { data: userData } = useGetUserMe();
@@ -57,42 +58,26 @@ export const ModuleDashboard = () => {
     }
   };
   return (
-    <div className="min-h-screen bg-[#FFFAF0] flex flex-col  md:flex-row">
-      <Sidebar username={userData?.username || ""} />
-      <div className="w-full p-4">
-        <section className="mb-8  ">
-          <div className="flex gap-2">
-            <h2 className="text-xl md:text-2xl font-black mb-4 inline-block bg-[#FFD166] px-4 py-2 border-4 border-black transform -rotate-1">
-              Pertanyaan Aktif
-            </h2>
-            <div className="flex md:flex-row flex-col gap-2">
-              <Button onClick={handleCopy}>
-                {copied ? "Berhasil Disalin!" : "Link Overlay"}
-              </Button>
-              <Button onClick={handleCopyQna}>
-                {copiedQna ? "Berhasil Disalin!" : "Link Kirim Pesan"}
-              </Button>
-            </div>
+    <div className=" bg-[#FFFAF0] flex flex-col md:ml-64    md:flex-row">
+      <div className="w-full md:p-12 p-6 flex flex-col gap-10">
+        <h1 className="text-4xl underline font-bold">Dashboard</h1>
+        <section className=" flex flex-col  gap-10 ">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-4">
+            <StatCard color="#ff6b6b" title="Total Pertanyaan" value="100" icon={<Mail />} />
+            <StatCard color="#ffe66d" title="Link Overlay" button buttonName={`${copied ? "Berhasil disalin" : "Salin Link"} `} onClick={() => handleCopy()} icon={<Blocks />} />
+            <StatCard color="#4ecdc4" title="Link QnA" button buttonName={`${copiedQna ? "Berhasil disalin" : "Salin Link"}`} onClick={() => handleCopyQna()} icon={<MailQuestion />} />
           </div>
-          <div className="">
-            <OverlayCard
-              username={
-                activeQuestion?.name ? activeQuestion?.name : "Anomalus"
-              }
-              question={activeQuestion?.question || ""}
-              variant="neutral"
-              // createAt={distanceDate(activeQuestion?.createAt || "")}
-            />
-          </div>
+
+          <ActiveQuestions name={activeQuestion?.name || "Anomali"} question={activeQuestion?.question || ""} createdAt={distanceDate(activeQuestion?.createdAt)} />
         </section>
         <section>
-          <div className="flex flex-row items-center gap-2">
-            <h2 className="text-xl md:text-2xl font-black mb-4 inline-block bg-[#118AB2] text-white px-4 py-2 border-4 border-black transform rotate-1">
-              Pertanyaan Terbaru
-            </h2>
-            <Button onClick={() => refetch()}>Refresh</Button>
-          </div>
-          <div className="">
+          <div className="border-border border-2 p-4 bg-[#4ecdc4] ">
+            <div className="flex flex-row justify-between gap-2">
+
+              <h1 className="text-2xl font-bold text-black">Pertanyaan Baru</h1>
+              <Button variant="neutral" onClick={() => refetch()}>Segarkan</Button>
+            </div>
+
             {questionData &&
               questionData.map((item, index) => (
                 <Card
@@ -106,8 +91,8 @@ export const ModuleDashboard = () => {
                       questionId: item.id,
                     })
                   }
-                  // size="sm"
                   createAt={distanceDate(item.createAt)}
+                // size="sm"
                 />
               ))}
           </div>

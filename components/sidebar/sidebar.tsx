@@ -5,13 +5,16 @@ import { Home, LogOut, Menu, MessageCircle, X } from "lucide-react";
 import Link from "next/link";
 import { Fragment } from "react";
 import { Button } from "../ui/button";
+import { signOut } from "next-auth/react";
 
 type SidebarProps = {
   username: string;
 };
 export const Sidebar = ({ username }: SidebarProps) => {
   const { sidebarOpen, setSidebarOpen } = useSidebarStore((state) => state);
-
+  const handleLogOut = () => {
+    signOut({ callbackUrl: "/" })
+  }
   return (
     <Fragment>
       <div className="md:hidden flex items-center justify-between p-4 bg-[#FFD166] border-b-4 border-black">
@@ -28,9 +31,8 @@ export const Sidebar = ({ username }: SidebarProps) => {
         </Button>
       </div>
       <div
-        className={`${
-          sidebarOpen ? "block" : "hidden"
-        } md:block w-full md:w-64 bg-[#FFD166] border-b-4 md:border-b-0 md:border-r-4 border-black md:min-h-screen z-10 fixed md:sticky top-0 h-screen md:h-auto overflow-auto`}
+        className={`${sidebarOpen ? "block" : "hidden"
+          } md:block w-full md:w-64 fixed border-b-4  md:border-b-0 md:border-r-4 bg-white border-black md:h-screen z-10 top-0 h-screen  overflow-y-hidden`}
       >
         <div className="p-4 border-b-4 border-black hidden md:block">
           <Link href="/" className="flex items-center gap-2">
@@ -60,7 +62,7 @@ export const Sidebar = ({ username }: SidebarProps) => {
             </Link>
           </nav>
 
-          <Button className="flex items-center gap-2 p-3 mt-6 w-full bg-white border-2 border-black font-bold hover:bg-gray-100">
+          <Button onClick={() => handleLogOut()} className="flex items-center gap-2 p-3 mt-6 w-full bg-white border-2 border-black font-bold hover:bg-gray-100">
             <LogOut className="w-5 h-5" />
             Keluar
           </Button>
