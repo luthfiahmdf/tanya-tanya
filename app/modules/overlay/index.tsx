@@ -8,19 +8,12 @@ export const Overlay = () => {
   const params = useParams<{ username: string }>();
   const { data, refetch } = useGetOverlay(params.username);
   useEffect(() => {
-    const handleStorageChange = () => {
-      const isUpdateOverlayTrue =
-        localStorage.getItem("update-overlay") === "true";
-      if (isUpdateOverlayTrue) {
-        refetch();
-        localStorage.setItem("update-overlay", "false");
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
+    const interval = setInterval(() => {
+      refetch();
+    }, 3000); // refetch API tiap 3 detik
 
     return () => {
-      window.removeEventListener("storage", handleStorageChange);
+      clearInterval(interval);
     };
   }, [refetch]);
   console.log(data);

@@ -7,6 +7,7 @@ import { useGetOverlay } from "../overlay/hook";
 import { Sidebar } from "@/components/sidebar/sidebar";
 import { TUpdateQuestion } from "./api";
 import { OverlayCard } from "@/components/ui/overlay-card";
+import { distanceDate } from "@/app/utils/distance-date";
 
 export const ModuleDashboard = () => {
   const { data: userData } = useGetUserMe();
@@ -106,7 +107,7 @@ export const ModuleDashboard = () => {
                     })
                   }
                   // size="sm"
-                  // createAt={distanceDate(item.createAt)}
+                  createAt={distanceDate(item.createAt)}
                 />
               ))}
           </div>
