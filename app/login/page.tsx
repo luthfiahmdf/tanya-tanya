@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   },
 };
 
-const DashboardModule: NextPage = (): ReactElement => (
+const ModuleLoginPage: NextPage = (): ReactElement => (
   <section key="login-tanya-tanya">
     <ModuleLogin />
   </section>
 );
-export default DashboardModule;
+export default ModuleLoginPage;
