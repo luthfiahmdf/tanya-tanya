@@ -8,4 +8,5 @@ export type TQuestionResponse = {
   userId: string;
   name: string;
   createAt: string;
+  isViewed: boolean | null;
 };

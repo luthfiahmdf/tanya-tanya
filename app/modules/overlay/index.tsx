@@ -3,7 +3,6 @@ import { useParams } from "next/navigation";
 import { useGetOverlay } from "./hook";
 import { useEffect } from "react";
 import { ActiveQuestions } from "@/components/ui/active-question";
-import { distanceDate } from "@/app/utils/distance-date";
 
 export const Overlay = () => {
   const params = useParams<{ username: string }>();
@@ -17,8 +16,8 @@ export const Overlay = () => {
       clearInterval(interval);
     };
   }, [refetch]);
-  console.log(data);
+  // console.log(data);
   return data ? (
-    <ActiveQuestions overlay name={data.name} question={data.question} createdAt={distanceDate(data.createdAt)} />
+    <ActiveQuestions overlay name={data.name} question={data.question} />
   ) : null;
 };

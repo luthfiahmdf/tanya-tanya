@@ -39,7 +39,7 @@ export default function ModuleLogin() {
     },
   });
   const onSubmit = async (data: LoginSchema) => {
-    console.log(data);
+    // console.log(data);
     // Proses login
     try {
       const result = await signIn("login", {
@@ -96,11 +96,10 @@ export default function ModuleLogin() {
                           <Input
                             placeholder="Masukkan username Anda"
                             disabled={form.formState.isSubmitting}
-                            className={`w-full p-3 border-4 border-black focus:outline-none focus:ring-2 focus:ring-[#118AB2] h-16 rounded-[0px] ${
-                              form.formState.errors.username
+                            className={`w-full p-3 border-4 border-black focus:outline-none focus:ring-2 focus:ring-[#118AB2] h-16 rounded-[0px] ${form.formState.errors.username
                                 ? "border-red-500"
                                 : ""
-                            }`}
+                              }`}
                             {...field}
                           />
                         </FormControl>
@@ -122,11 +121,10 @@ export default function ModuleLogin() {
                               type={showPassword ? "text" : "password"}
                               placeholder="Masukkan password Anda"
                               disabled={form.formState.isSubmitting}
-                              className={`w-full p-3 border-4 border-black focus:outline-2 focus:outline-offset-2 focus:outline-violet-500   h-16 rounded-[0px] ${
-                                form.formState.errors.username
+                              className={`w-full p-3 border-4 border-black focus:outline-2 focus:outline-offset-2 focus:outline-violet-500   h-16 rounded-[0px] ${form.formState.errors.username
                                   ? "border-red-500"
                                   : ""
-                              }`}
+                                }`}
                               {...field}
                             />
                             <Button
