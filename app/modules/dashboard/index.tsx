@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useGetOverlay } from "../overlay/hook";
 import { TUpdateQuestion } from "./api";
-import { distanceDate } from "@/app/utils/distance-date";
 import { StatCard } from "@/components/ui/card-stats";
 import { ActiveQuestions } from "@/components/ui/active-question";
 import { Blocks, Mail, MailQuestion } from "lucide-react";
@@ -47,10 +46,9 @@ export const ModuleDashboard = () => {
     try {
       mutate(questionId, {
         onSuccess: () => {
-          console.log("berhasil Update");
           refetcOverlay();
           setUpdateOverlay("update-overlay", true);
-          console.log(questionId);
+          //   console.log(questionId);
         },
       });
     } catch (error) {
@@ -60,7 +58,7 @@ export const ModuleDashboard = () => {
   return (
     <div className=" bg-[#FFFAF0] flex flex-col md:ml-64    md:flex-row">
       <div className="w-full md:p-12 p-6 flex flex-col gap-10">
-        <h1 className="text-4xl underline font-bold">Dashboard</h1>
+        {/* <h1 className="text-2xl underline font-bold">Dashboard</h1> */}
         <section className=" flex flex-col  gap-10 ">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-4">
             <StatCard color="#ff6b6b" title="Total Pertanyaan" value="100" icon={<Mail />} />
@@ -68,14 +66,14 @@ export const ModuleDashboard = () => {
             <StatCard color="#4ecdc4" title="Link QnA" button buttonName={`${copiedQna ? "Berhasil disalin" : "Salin Link"}`} onClick={() => handleCopyQna()} icon={<MailQuestion />} />
           </div>
 
-          <ActiveQuestions name={activeQuestion?.name || "Anomali"} question={activeQuestion?.question || ""} createdAt={distanceDate(activeQuestion?.createdAt)} />
+          <ActiveQuestions name={activeQuestion?.name || "Anomali"} question={activeQuestion?.question || ""} />
         </section>
         <section>
           <div className="border-border border-2 p-4 bg-[#4ecdc4] ">
             <div className="flex flex-row justify-between gap-2">
 
               <h1 className="text-2xl font-bold text-black">Pertanyaan Baru</h1>
-              <Button variant="neutral" onClick={() => refetch()}>Segarkan</Button>
+              <Button variant="neutral" className="cursor-pointer" onClick={() => refetch()}>Segarkan</Button>
             </div>
 
             {questionData &&
@@ -91,7 +89,8 @@ export const ModuleDashboard = () => {
                       questionId: item.id,
                     })
                   }
-                  createAt={distanceDate(item.createAt)}
+                  isViewed={item.isViewed}
+                // createAt={distanceDate(item.createAt)}
                 // size="sm"
                 />
               ))}

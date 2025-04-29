@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
-import { Clock, Eye, User } from "lucide-react";
+import { Eye, User } from "lucide-react";
 
 const cardVariants = cva(
   "border-2 border-border  p-6 shadow-shadow transition-all  bg-main",
@@ -44,7 +44,8 @@ export interface CardProps
   asChild?: boolean;
   username: string;
   question: string;
-  createAt?: string;
+  // createAt?: string;
+  isViewed: boolean | null;
   onShow?: () => void; // <-- tambahan
 }
 
@@ -57,7 +58,8 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       shadow,
       username,
       question,
-      createAt,
+      isViewed,
+      //     createAt,
       asChild = false,
       onShow, // <-- ambil props
 
@@ -83,13 +85,13 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
               <User className="h-3 w-3" />
               <p className="text-xs">{username}</p>
             </div>
-            <div className="flex items-center gap-1">
-              <Clock className="h-3 w-3" />
-              <span className="text-xs">{createAt}</span>
-            </div>
+            {/* <div className="flex items-center gap-1"> */}
+            {/*   <Clock className="h-3 w-3" /> */}
+            {/*   <span className="text-xs">{createAt}</span> */}
+            {/* </div> */}
             <div className="flex items-center gap-1">
               <Eye className="h-3 w-3" />
-              <span className="text-xs">Sudah dilihat</span>
+              <span className="text-xs">{isViewed ? "Sudah dilihat" : "Belum dilihat"}</span>
             </div>
 
           </div>

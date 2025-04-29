@@ -45,7 +45,7 @@ export default function QnaModule() {
     },
   });
   const onSubmit = async (values: z.infer<typeof questionSchema>) => {
-    console.log(values);
+    // console.log(values);
     // Proses login
     try {
       mutate(values, {
@@ -89,11 +89,6 @@ export default function QnaModule() {
                 </h1>
               </div>
 
-              <Button
-                onClick={() => addToast("Pesannya Udah dikirim yaa..", "success")}
-              >
-                Show Toast
-              </Button>
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
@@ -170,15 +165,6 @@ export default function QnaModule() {
                     </DialogContent>
                   </Dialog>
 
-                  <Button
-                    type="submit"
-                    disabled={form.formState.isSubmitting}
-                    className="w-full py-3 border-4 text-black border-black font-bold text-lg h-16  disabled:opacity-70 disabled:cursor-not-allowed"
-                  >
-                    {form.formState.isSubmitting
-                      ? "Memproses..."
-                      : "Kirim Pesan"}
-                  </Button>
 
                   {/* Register link */}
                 </form>

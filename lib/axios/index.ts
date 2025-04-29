@@ -9,12 +9,12 @@ export const api = axios.create(configApi);
 api.interceptors.request.use(
   async (config) => {
     const session = await getSession();
-    console.log("[Interceptor] Session:", session);
+    //  console.log("[Interceptor] Session:", session);
 
     const token = session?.user?.accessToken;
 
     if (token) {
-      console.log("[Interceptor] Attach token:", token);
+      //      console.log("[Interceptor] Attach token:", token);
       config.headers.Authorization = `Bearer ${token}`;
     } else {
       console.warn("[Interceptor] No token found");

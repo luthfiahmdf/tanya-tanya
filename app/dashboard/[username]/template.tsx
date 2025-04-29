@@ -12,8 +12,8 @@ export default function RootLayout({
 
   const params = useParams<{ username: string }>()
   return (
-    <html lang="en">
-      <body className={` min-h-screen bg-[#f0f0f0] font-mono`}>
+    <html lang="id">
+      <body className={` min-h-screen bg-[#f0f0f0]`}>
         <div className="md:flex  min-h-screen">
           <Sidebar username={params.username} />
           <div className="flex-1 flex flex-col">

@@ -1,16 +1,16 @@
 
 "use client"
 
-import { Clock, User } from "lucide-react"
+import { User } from "lucide-react"
 
 type activeQuestion = {
   name: string
   question: string
-  createdAt: string
+  //  createdAt: string
   overlay?: boolean
 }
 
-export function ActiveQuestions({ overlay = false, name, question, createdAt }: activeQuestion) {
+export function ActiveQuestions({ overlay = false, name, question, }: activeQuestion) {
 
 
   return (
@@ -34,10 +34,10 @@ export function ActiveQuestions({ overlay = false, name, question, createdAt }: 
             <User className="h-3 w-3" />
             <span className="text-xs">@{name}</span>
           </div>
-          <div className="flex items-center gap-1">
-            <Clock className="h-3 w-3" />
-            <span className="text-xs">{createdAt}</span>
-          </div>
+          {/* <div className="flex items-center gap-1"> */}
+          {/*   <Clock className="h-3 w-3" /> */}
+          {/*   <span className="text-xs">{createdAt}</span> */}
+          {/* </div> */}
 
         </div>
       </div>
