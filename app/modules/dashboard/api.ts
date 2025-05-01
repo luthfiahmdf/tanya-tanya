@@ -15,10 +15,10 @@ export const getQuestion = async (username: string) => {
 };
 export const updateActiveQuestion = async (
   payload: TUpdateQuestion,
-  username: string
+  id: string
 ) => {
   const { data } = await api.put<TActiveOverlay>(
-    `activeQuestions/${username}`,
+    `activeQuestions/${id}`,
     payload
   );
   return data;
