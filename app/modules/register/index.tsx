@@ -18,11 +18,12 @@ import { Button } from "@/components/ui/button";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRegister } from "./hook";
-import { toast } from "sonner";
+import { useToast } from "@/components/ui/toast";
+
 
 export default function ModuleRegister() {
   const [showPassword, setShowPassword] = useState(false);
-
+  const { addToast } = useToast()
   const registerSchema = z.object({
     username: z.string().nonempty("Username harus diisi"),
     password: z.string().nonempty("Password harus diisi"),
@@ -42,7 +43,8 @@ export default function ModuleRegister() {
       mutate(values, {
         onSuccess: () => {
           form.reset();
-          toast.success("Register Berhasil");
+          addToast(`Berhasil Daftar niih..`, "success")
+
           window.location.href = "/login";
         },
       });
