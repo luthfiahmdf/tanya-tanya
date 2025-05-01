@@ -21,10 +21,10 @@ export const useGetQuestion = (
     queryFn: async () => await getQuestion(username),
   });
 };
-export const useUpdateActiveQuestion = (username: string) => {
+export const useUpdateActiveQuestion = (id: string) => {
   return useMutation({
-    mutationKey: ["update-active-question", username],
+    mutationKey: ["update-active-question", id],
     mutationFn: async (payload: TUpdateQuestion) =>
-      updateActiveQuestion(payload, username),
+      updateActiveQuestion(payload, id),
   });
 };

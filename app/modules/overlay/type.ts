@@ -1,7 +1,7 @@
 export type TActiveOverlay = {
-  id: string;
-  userId: string;
-  name: string;
+  id?: string;
+  userId?: string;
+  sender: string
   question: string;
-  createdAt: string;
+  createdAt?: string;
 };

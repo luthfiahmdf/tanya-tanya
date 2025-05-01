@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { ReactElement } from "react";
 import { Metadata } from "next";
-import { TestPage } from "../modules/test";
+import { OverlayClient } from "../../modules/test";
 
 export const metadata: Metadata = {
   title: "Test Page",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const QNAModule: NextPage = (): ReactElement => (
   <section key="qna">
-    <TestPage />
+    <OverlayClient />
   </section>
 );
 export default QNAModule;

@@ -4,8 +4,8 @@
 import { User } from "lucide-react"
 
 type activeQuestion = {
-  name: string
-  question: string
+  name?: string
+  question?: string
   //  createdAt: string
   overlay?: boolean
 }

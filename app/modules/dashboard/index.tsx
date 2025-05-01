@@ -19,7 +19,7 @@ export const ModuleDashboard = () => {
   const { data: activeQuestion, refetch: refetcOverlay } = useGetOverlay(
     userData?.id || ""
   );
-  const { mutate } = useUpdateActiveQuestion(userData?.username || "");
+  const { mutate } = useUpdateActiveQuestion(userData?.id || "");
   const setUpdateOverlay = (key: string, value: boolean) => {
     localStorage.setItem(key, JSON.stringify(value));
   };
@@ -66,7 +66,7 @@ export const ModuleDashboard = () => {
             <StatCard color="#4ecdc4" title="Link QnA" button buttonName={`${copiedQna ? "Berhasil disalin" : "Salin Link"}`} onClick={() => handleCopyQna()} icon={<MailQuestion />} />
           </div>
 
-          <ActiveQuestions name={activeQuestion?.name || "Anomali"} question={activeQuestion?.question || ""} />
+          <ActiveQuestions name={activeQuestion?.sender || "Anomali"} question={activeQuestion?.question || ""} />
         </section>
         <section>
           <div className="border-border border-2 p-4 bg-[#4ecdc4] ">
