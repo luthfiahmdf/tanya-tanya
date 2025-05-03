@@ -5,6 +5,10 @@ import { TActiveOverlay } from "../overlay/type";
 export type TUpdateQuestion = {
   questionId: string;
 };
+export type TParamsData = {
+  id: string
+}
+
 export const userMe = async () => {
   const { data } = await api.get<TUserMeResponse>("users/me");
   return data;
@@ -23,3 +27,12 @@ export const updateActiveQuestion = async (
   );
   return data;
 };
+
+export const getDataDashboard = async (
+  id: string
+) => {
+  const { data } = await api.get<TParamsData>(
+    `dashboard/${id}`
+  )
+  return data
+}

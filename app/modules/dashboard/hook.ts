@@ -1,11 +1,12 @@
 import { useMutation, useQuery, UseQueryResult } from "@tanstack/react-query";
 import {
+  getDataDashboard,
   getQuestion,
   TUpdateQuestion,
   updateActiveQuestion,
   userMe,
 } from "./api";
-import { TQuestionResponse, TUserMeResponse } from "./type";
+import { TDataDashboardResponse, TQuestionResponse, TUserMeResponse } from "./type";
 
 export const useGetUserMe = (): UseQueryResult<TUserMeResponse> => {
   return useQuery({
@@ -28,3 +29,11 @@ export const useUpdateActiveQuestion = (id: string) => {
       updateActiveQuestion(payload, id),
   });
 };
+export const useGetDashboardData = (
+  id: string
+): UseQueryResult<TDataDashboardResponse> => {
+  return useQuery(({
+    queryKey: ["data-dashboard"],
+    queryFn: async () => await getDataDashboard(id)
+  }))
+}

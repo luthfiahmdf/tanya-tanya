@@ -1,5 +1,5 @@
 "use client";
-import { useGetQuestion, useGetUserMe, useUpdateActiveQuestion } from "./hook";
+import { useGetDashboardData, useGetQuestion, useGetUserMe, useUpdateActiveQuestion } from "./hook";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -13,7 +13,8 @@ export const ModuleDashboard = () => {
   const { data: userData } = useGetUserMe();
   const [copied, setCopied] = useState(false);
   const [copiedQna, setCopiedQna] = useState(false);
-  const { data: questionData, refetch } = useGetQuestion(
+  const { data: dataDashboard, isLoading } = useGetDashboardData(userData?.id || "",)
+  const { data: questionData, refetch, isLoading: isloadingQuestion } = useGetQuestion(
     userData?.username || ""
   );
   const { data: activeQuestion, refetch: refetcOverlay } = useGetOverlay(
@@ -61,12 +62,20 @@ export const ModuleDashboard = () => {
         {/* <h1 className="text-2xl underline font-bold">Dashboard</h1> */}
         <section className=" flex flex-col  gap-10 ">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-4">
-            <StatCard color="#ff6b6b" title="Total Pertanyaan" value="100" icon={<Mail />} />
+            <StatCard color="#ff6b6b" title="Total Pertanyaan"
+
+              value={isLoading ? 0 : (dataDashboard?.totalQuestion)}
+
+              icon={<Mail />} />
             <StatCard color="#ffe66d" title="Link Overlay" button buttonName={`${copied ? "Berhasil disalin" : "Salin Link"} `} onClick={() => handleCopy()} icon={<Blocks />} />
             <StatCard color="#4ecdc4" title="Link QnA" button buttonName={`${copiedQna ? "Berhasil disalin" : "Salin Link"}`} onClick={() => handleCopyQna()} icon={<MailQuestion />} />
           </div>
 
-          <ActiveQuestions name={activeQuestion?.sender || "Anomali"} question={activeQuestion?.question || ""} />
+
+          <ActiveQuestions
+            name={isLoading ? "Memuat..." : activeQuestion?.sender || "Anomali"}
+            question={isLoading ? "Memuat..." : activeQuestion?.question || "Belum Ada Pertanyaan Aktif"}
+          />
         </section>
         <section>
           <div className="border-border border-2 p-4 bg-[#4ecdc4] ">
@@ -76,24 +85,27 @@ export const ModuleDashboard = () => {
               <Button variant="neutral" className="cursor-pointer" onClick={() => refetch()}>Segarkan</Button>
             </div>
 
-            {questionData &&
+
+            {isloadingQuestion ? (
+              <p className="text-white mt-4">Memuat pertanyaan...</p>
+            ) : questionData && questionData.length > 0 ? (
               questionData.map((item, index) => (
                 <Card
                   key={index}
-                  // shadow="none"
                   variant="neutral"
-                  username={item.name ? item.name : "Anomalus"}
-                  question={item.question}
+                  username={item.name || "Belum Ada"}
+                  question={item.question || "Belum Ada"}
                   onShow={() =>
                     onShow({
                       questionId: item.id,
                     })
                   }
-                  isViewed={item.isViewed}
-                // createAt={distanceDate(item.createAt)}
-                // size="sm"
+                  isViewed={item.isViewed || false}
                 />
-              ))}
+              ))
+            ) : (
+              <p className="text-white mt-4">Belum ada pertanyaan baru.</p>
+            )}
           </div>
         </section>
       </div>

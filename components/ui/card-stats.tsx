@@ -4,7 +4,7 @@ import { Button } from "./button"
 
 interface StatCardProps {
   title: string
-  value?: string
+  value?: number
   button?: boolean
   icon: React.ReactNode
   color: string

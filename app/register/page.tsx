@@ -7,7 +7,8 @@ export const metadata: Metadata = {
   description: "Register Tanya-Tanya",
   icons: {
     icon: "/icon.ico"
-  }
+  },
+
 }
 
 

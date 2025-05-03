@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🗣️ Tanya-Tanya
 
-## Getting Started
+**Tanya-Tanya** adalah aplikasi Q&A interaktif yang memungkinkan _viewer_ untuk mengirim pertanyaan kepada _streamer_. Streamer dapat memilih pertanyaan yang ingin ditampilkan sebagai **overlay realtime** di OBS. Cocok digunakan saat live streaming untuk meningkatkan interaksi dan partisipasi audiens.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Fitur Utama
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 🎙️ Viewer dapat mengirimkan pertanyaan secara langsung.
+- 📋 Streamer memiliki panel untuk melihat dan memilih pertanyaan.
+- ⚡ Tampilan overlay pertanyaan secara **realtime** di OBS.
+- 🔐 Autentikasi aman menggunakan **NextAuth**.
+- 🧠 Manajemen state global ringan dengan **Zustand**.
+- 🔁 Pengambilan dan sinkronisasi data efisien dengan **TanStack React Query**.
+- 🧪 Validasi form modern menggunakan **React Hook Form + Zod**.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧰 Tech Stack
 
-## Learn More
+| Kategori        | Teknologi                                                                                                        |
+| --------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Framework       | [Next.js 15 (App Router)](https://nextjs.org/)                                                                   |
+| Library UI      | [React 19](https://reactjs.org/), [Tailwind CSS 4](https://tailwindcss.com/),[shadcn/ui](https://ui.shadcn.com/) |
+| Form & Validasi | [React Hook Form](https://react-hook-form.com/), [Zod](https://zod.dev/)                                         |
+| Autentikasi     | [NextAuth.js](https://next-auth.js.org/)                                                                         |
+| Data Fetching   | [@tanstack/react-query](https://tanstack.com/query/latest)                                                       |
+| Utility         | `clsx`, `axios`, `date-fns`                                                                                      |
+| Realtime        | WebSocket                                                                                                        |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎥 Mode Overlay OBS
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Buka halaman khusus overlay (misalnya: `/overlay/[streamId]`).
+2. Salin URL tersebut dan **tempel di OBS** menggunakan "Browser Source".
+3. Overlay akan menampilkan pertanyaan aktif yang dipilih streamer secara realtime.
