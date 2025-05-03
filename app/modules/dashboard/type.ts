@@ -10,3 +10,6 @@ export type TQuestionResponse = {
   createAt: string;
   isViewed: boolean | null;
 };
+export type TDataDashboardResponse = {
+  totalQuestion: number
+}
