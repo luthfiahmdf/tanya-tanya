@@ -27,7 +27,7 @@ export function ActiveQuestions({ overlay = false, name, question, }: activeQues
 
 
       <div className="border-2 border-black p-3">
-        <h3 className="text-lg font-bold">{question}</h3>
+        <h3 className="text-lg ">{question}</h3>
 
         <div className="flex flex-wrap items-center gap-3 mt-2 text-sm">
           <div className="flex items-center gap-1">
