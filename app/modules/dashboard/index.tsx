@@ -13,7 +13,7 @@ export const ModuleDashboard = () => {
   const { data: userData } = useGetUserMe();
   const [copied, setCopied] = useState(false);
   const [copiedQna, setCopiedQna] = useState(false);
-  const { data: dataDashboard, isLoading } = useGetDashboardData(userData?.id || "",)
+  const { data: dataDashboard, isLoading, refetch: refetchTotalData } = useGetDashboardData(userData?.id || "",)
   const { data: questionData, refetch, isLoading: isloadingQuestion } = useGetQuestion(
     userData?.username || ""
   );
@@ -56,6 +56,10 @@ export const ModuleDashboard = () => {
       console.log(error);
     }
   };
+  const refetchData = () => {
+    refetch()
+    refetchTotalData()
+  }
   return (
     <div className=" bg-[#FFFAF0] flex flex-col md:ml-64    md:flex-row">
       <div className="w-full md:p-12 p-6 flex flex-col gap-10">
@@ -82,7 +86,7 @@ export const ModuleDashboard = () => {
             <div className="flex flex-row justify-between gap-2">
 
               <h1 className="text-2xl font-bold text-black">Pertanyaan Baru</h1>
-              <Button variant="neutral" className="cursor-pointer" onClick={() => refetch()}>Segarkan</Button>
+              <Button variant="neutral" className="cursor-pointer" onClick={refetchData}>Segarkan</Button>
             </div>
 
 
