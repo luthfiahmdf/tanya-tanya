@@ -31,8 +31,8 @@ export default function QnaModule() {
     question: z
       .string()
       .min(3, "pertanyaan harus memiliki minimal 3 karakter")
-      .max(160, {
-        message: "jumlah karakter maksimal 160 karakter",
+      .max(250, {
+        message: "jumlah karakter maksimal 250 karakter",
       }),
   });
 
