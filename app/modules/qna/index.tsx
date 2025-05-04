@@ -124,7 +124,7 @@ export default function QnaModule() {
                         <FormLabel className="text-base">Pesan</FormLabel>
                         <FormControl>
                           <Textarea
-                            placeholder="Masukkan pertanyaan Anda (maksimal 160 karakter)"
+                            placeholder="Masukkan pertanyaan Anda (maksimal 250 karakter)"
                             disabled={form.formState.isSubmitting}
                             className={`w-full p-3 border-4 border-black focus:outline-none focus:ring-2 focus:ring-[#118AB2] h-56 rounded-[0px] ${form.formState.errors.question
                               ? "border-red-500"
