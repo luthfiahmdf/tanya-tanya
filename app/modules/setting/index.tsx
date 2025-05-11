@@ -90,7 +90,7 @@ export const SettingModule = () => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="noShadow" style={{ color: textColor }}>
-                Text Color
+                Warna Teks
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="center" className="w-56 bg-white">
