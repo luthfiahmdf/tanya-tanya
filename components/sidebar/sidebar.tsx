@@ -1,20 +1,39 @@
 "use client";
 
 import { useSidebarStore } from "@/app/provider/sidebar-store-provider";
-import { Home, LogOut, Menu, MessageCircle, X } from "lucide-react";
+import { Home, LogOut, Menu, MessageCircle, Settings, X } from "lucide-react";
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, ReactNode } from "react";
 import { Button } from "../ui/button";
 import { signOut } from "next-auth/react";
+import { useGetUserMe } from "@/app/modules/dashboard/hook";
 
-type SidebarProps = {
-  username: string;
-};
-export const Sidebar = ({ username }: SidebarProps) => {
+
+type sideBarLink = {
+  link: string
+  title: string
+  icon: ReactNode
+}
+
+export const Sidebar = () => {
   const { sidebarOpen, setSidebarOpen } = useSidebarStore((state) => state);
   const handleLogOut = () => {
     signOut({ callbackUrl: "/" })
   }
+  const { data } = useGetUserMe();
+  const navlink: sideBarLink[] = [
+    {
+      link: `/dashboard/${data?.username}`,
+      title: "Dashboard",
+      icon: <Home />
+    }, {
+      link: `/dashboard/setting`,
+      title: "Pengaturan",
+      icon: <Settings />
+    }
+
+
+  ]
   return (
     <Fragment>
       <div className="md:hidden flex items-center justify-between p-4 bg-[#FFD166] border-b-4 border-black">
@@ -44,24 +63,28 @@ export const Sidebar = ({ username }: SidebarProps) => {
         <div className="p-4">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 bg-[#EF476F] rounded-full border-2 border-black flex items-center justify-center font-bold text-white">
-              {username.charAt(0).toUpperCase()}
+              {data?.username.charAt(0).toUpperCase()}
             </div>
             <div>
-              <p className="text-sm">{username}</p>
+              <p className="text-sm">{data?.username}</p>
             </div>
           </div>
 
           <nav className="space-y-2">
-            <Link
-              href={`/dashboard/${username}`}
-              className="flex items-center gap-2 p-3 bg-[#FFFAF0] border-2 border-black font-bold"
-              onClick={setSidebarOpen}
-            >
-              <Home className="w-5 h-5" />
-              Dashboard
-            </Link>
+            {navlink.map((i, x) => {
+              return (
+                <Link
+                  href={i.link}
+                  className="flex items-center gap-2 p-3 bg-[#FFFAF0] border-2 border-black font-bold"
+                  onClick={setSidebarOpen}
+                  key={x}
+                >
+                  {i.icon}
+                  {i.title}
+                </Link>
+              )
+            })}
           </nav>
-
           <Button onClick={() => handleLogOut()} className="flex items-center gap-2 p-3 mt-6 w-full bg-white border-2 border-black font-bold hover:bg-gray-100">
             <LogOut className="w-5 h-5" />
             Keluar

@@ -7,14 +7,20 @@ type activeQuestion = {
   name?: string
   question?: string
   //  createdAt: string
+  bgColor?: string
+  textColor?: string
+  border?: boolean
+  fontFamily?: string
   overlay?: boolean
 }
 
-export function ActiveQuestions({ overlay = false, name, question, }: activeQuestion) {
-
+export function ActiveQuestions({ overlay = false, name, question, border, bgColor, textColor, fontFamily }: activeQuestion) {
 
   return (
-    <div className="border-4 border-black bg-white p-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+    <div className="border-2 border-black  p-4 " style={{
+      boxShadow: border ? "8px 8px 0px 0px rgba(0,0,0,1)" : "none",
+      backgroundColor: bgColor
+    }}>
       {
         overlay ? null : (
           <div className="flex justify-between items-center mb-3">
@@ -26,8 +32,11 @@ export function ActiveQuestions({ overlay = false, name, question, }: activeQues
       }
 
 
-      <div className="border-2 border-black p-3">
-        <h3 className="text-lg ">{question}</h3>
+      <div className=" break-all p-3" style={{
+        color: textColor,
+        fontFamily: fontFamily
+      }}>
+        <h3 className="text-lg  ">{question}</h3>
 
         <div className="flex flex-wrap items-center gap-3 mt-2 text-sm">
           <div className="flex items-center gap-1">

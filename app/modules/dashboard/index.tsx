@@ -8,6 +8,7 @@ import { TUpdateQuestion } from "./api";
 import { StatCard } from "@/components/ui/card-stats";
 import { ActiveQuestions } from "@/components/ui/active-question";
 import { Blocks, Mail, MailQuestion } from "lucide-react";
+import { useGetOverlaySettings } from "../setting/hook";
 
 export const ModuleDashboard = () => {
   const { data: userData } = useGetUserMe();
@@ -20,6 +21,7 @@ export const ModuleDashboard = () => {
   const { data: activeQuestion, refetch: refetcOverlay } = useGetOverlay(
     userData?.id || ""
   );
+  const { data: settings, } = useGetOverlaySettings(userData?.id || "");
   const { mutate } = useUpdateActiveQuestion(userData?.id || "");
   const setUpdateOverlay = (key: string, value: boolean) => {
     localStorage.setItem(key, JSON.stringify(value));
@@ -77,6 +79,10 @@ export const ModuleDashboard = () => {
 
 
           <ActiveQuestions
+            bgColor={settings?.bgColor}
+            textColor={settings?.textColor}
+            fontFamily={settings?.fontFamily}
+            border={settings?.border}
             name={isLoading ? "Memuat..." : activeQuestion?.sender || "Anomali"}
             question={isLoading ? "Memuat..." : activeQuestion?.question || "Belum Ada Pertanyaan Aktif"}
           />

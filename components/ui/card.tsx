@@ -77,7 +77,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
           {...props}
         >
           <div className="flex flex-row justify-between items-center gap-4 mb-2">
-            <h1 className="text-xl font-black">{question}</h1>
+            <h1 className="text-xl font-black break-all">{question}</h1>
             <Button variant="neutral" className="cursor-pointer" onClick={onShow}>Tampilkan</Button>
           </div>
           <div className="flex flex-col md:flex-row gap-3">
