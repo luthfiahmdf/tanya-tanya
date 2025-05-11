@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 const DashboardModule: NextPage = (): ReactElement => (
-  <section key="register-lentera-pos">
+  <section key="register-lentera-pos" className="min-h-screen bg-[#FFFAF0]">
     <ModuleDashboard />
   </section>
 );
