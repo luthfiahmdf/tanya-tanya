@@ -1,6 +1,5 @@
 import { Navbar } from "@/components/navbar";
 import { HeroSection } from "@/components/landing-section/hero-section";
-import { StatsSection } from "@/components/landing-section/stats-section";
 import { FeatureSection } from "@/components/landing-section/feature-section";
 import { HowItsWorksSection } from "@/components/landing-section/how-its-work";
 import { CtaSection } from "@/components/landing-section/cta-section";
@@ -15,7 +14,6 @@ export default function LandingPage() {
         {/* Hero Section */}
         <HeroSection />
         {/* Stats Section */}
-        <StatsSection />
         {/* Features Section */}
         <FeatureSection />
         {/* How It Works */}

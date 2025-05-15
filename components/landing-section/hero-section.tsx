@@ -9,17 +9,16 @@ export const HeroSection = (): ReactElement => {
       <div className="grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6">
           <div className="inline-block bg-[#06D6A0] px-4 py-2 font-bold border-2 border-black rotate-1">
-            Platform Q&A Terbaik
+            Platform Q&A untuk Streamer
           </div>
           <h1 className="text-5xl md:text-6xl font-black leading-tight">
-            Tanya Apapun, <br />
-            <span className="bg-[#118AB2] text-white px-2">
-              Dapatkan Jawaban
-            </span>
+            Interaksi <br />
+            <span className="bg-[#118AB2] text-white px-2">Lebih Seru</span> <br />
+            dengan Viewers
           </h1>
           <p className="text-xl">
-            Platform tanya jawab yang menghubungkan orang dengan pertanyaan dan
-            mereka yang memiliki jawaban.
+            Platform Q&A yang menghubungkan streamer dengan viewers. Tampilkan pertanyaan langsung di OBS untuk
+            interaksi yang lebih menarik.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <Link
