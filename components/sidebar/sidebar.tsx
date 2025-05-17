@@ -36,7 +36,7 @@ export const Sidebar = () => {
   ]
   return (
     <Fragment>
-      <div className="md:hidden flex items-center justify-between p-4 bg-[#FFD166] border-b-4 border-black">
+      <div className="md:hidden flex items-center justify-between p-4 bg-background border-b-4 border-black">
         <Link href="/" className="flex items-center gap-2">
           <MessageCircle className="h-6 w-6" />
           <h1 className="text-xl font-black">TANYA-TANYA</h1>

@@ -7,16 +7,14 @@ interface StatCardProps {
   value?: number
   button?: boolean
   icon: React.ReactNode
-  color: string
   buttonName?: string
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-export function StatCard({ onClick, title, value, icon, color, button = false, buttonName }: StatCardProps) {
+export function StatCard({ onClick, title, value, icon, button = false, buttonName }: StatCardProps) {
   return (
     <div
-      className="p-6 border-4 border-black rounded-none shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
-      style={{ backgroundColor: color }}
+      className="p-6 border-4 bg-background border-black rounded-none shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
     >
       <div className="flex justify-between items-center">
         <div>

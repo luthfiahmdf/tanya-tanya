@@ -68,13 +68,13 @@ export const ModuleDashboard = () => {
         {/* <h1 className="text-2xl underline font-bold">Dashboard</h1> */}
         <section className=" flex flex-col  gap-10 ">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-4">
-            <StatCard color="#ff6b6b" title="Total Pertanyaan"
+            <StatCard title="Total Pertanyaan"
 
               value={isLoading ? 0 : (dataDashboard?.totalQuestion)}
 
               icon={<Mail />} />
-            <StatCard color="#ffe66d" title="Link Overlay" button buttonName={`${copied ? "Berhasil disalin" : "Salin Link"} `} onClick={() => handleCopy()} icon={<Blocks />} />
-            <StatCard color="#4ecdc4" title="Link QnA" button buttonName={`${copiedQna ? "Berhasil disalin" : "Salin Link"}`} onClick={() => handleCopyQna()} icon={<MailQuestion />} />
+            <StatCard title="Link Overlay" button buttonName={`${copied ? "Berhasil disalin" : "Salin Link"} `} onClick={() => handleCopy()} icon={<Blocks />} />
+            <StatCard title="Link QnA" button buttonName={`${copiedQna ? "Berhasil disalin" : "Salin Link"}`} onClick={() => handleCopyQna()} icon={<MailQuestion />} />
           </div>
 
 
@@ -88,7 +88,7 @@ export const ModuleDashboard = () => {
           />
         </section>
         <section>
-          <div className="border-border border-2 p-4 bg-[#4ecdc4] ">
+          <div className="border-border border-2 p-4 bg-background ">
             <div className="flex flex-row justify-between gap-2">
 
               <h1 className="text-2xl font-bold text-black">Pertanyaan Baru</h1>

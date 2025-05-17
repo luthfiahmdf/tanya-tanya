@@ -4,7 +4,7 @@ import { ReactElement } from "react";
 
 export const Navbar = (): ReactElement => {
   return (
-    <header className="border-b-4 border-black bg-[#FFD166] p-4">
+    <header className="border-b-4 border-black bg-background p-4">
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center gap-2">
           <MessageCircle className="h-8 w-8" />
@@ -30,7 +30,7 @@ export const Navbar = (): ReactElement => {
           </Link>
           <Link
             href="/register"
-            className="px-4 py-2 font-bold bg-[#EF476F] border-2 border-black hover:bg-[#ff5a7e] transition-colors"
+            className="px-4 py-2 font-bold bg-background border-2 border-black hover:bg-black hover:text-white transition-colors"
           >
             Daftar
           </Link>
