@@ -4,12 +4,12 @@ import { ReactElement } from "react";
 
 export const Footer = (): ReactElement => {
   return (
-    <footer className="bg-black text-white py-12 border-t-4 border-[#FFD166]">
+    <footer className="bg-background py-12 border-t-4 border-black">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <MessageCircle className="h-8 w-8 text-[#FFD166]" />
+              <MessageCircle className="h-8 w-8 text-black" />
               <h2 className="text-2xl font-black">TANYA-TANYA</h2>
             </div>
             <p>
@@ -18,7 +18,7 @@ export const Footer = (): ReactElement => {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold mb-4 border-b-2 border-[#FFD166] pb-2">
+            <h3 className="text-lg font-bold mb-4 border-b-2 border-black pb-2">
               Navigasi
             </h3>
             <ul className="space-y-2">
@@ -46,7 +46,7 @@ export const Footer = (): ReactElement => {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold mb-4 border-b-2 border-[#FFD166] pb-2">
+            <h3 className="text-lg font-bold mb-4 border-b-2 border-black pb-2">
               Legal
             </h3>
             <ul className="space-y-2">
@@ -69,7 +69,7 @@ export const Footer = (): ReactElement => {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold mb-4 border-b-2 border-[#FFD166] pb-2">
+            <h3 className="text-lg font-bold mb-4 border-b-2 border-black pb-2">
               Kontak
             </h3>
             <ul className="space-y-2">
@@ -136,7 +136,7 @@ export const Footer = (): ReactElement => {
 
         <div className="mt-12 pt-6 border-t border-gray-700 text-center">
           <p>
-            &copy; {new Date().getFullYear()} Tanya-Tanya. Semua hak dilindungi.
+            &copy; {new Date().getFullYear()} made with ❤️ by luthfiahmdf
           </p>
         </div>
       </div>

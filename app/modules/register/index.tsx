@@ -55,7 +55,7 @@ export default function ModuleRegister() {
 
   return (
     <div className="min-h-screen bg-[#FFFAF0] flex flex-col">
-      <header className="border-b-4 border-black bg-[#FFD166] p-4">
+      <header className="border-b-4 border-black bg-background p-4">
         <div className="container mx-auto flex items-center">
           <Link href="/" className="flex items-center gap-2">
             <MessageCircle className="h-8 w-8" />
@@ -67,7 +67,7 @@ export default function ModuleRegister() {
       <main className="flex-1 flex items-center justify-center p-4 md:p-8">
         <div className="w-full max-w-md">
           <div className="relative">
-            <div className="absolute -top-4 -left-4 w-full h-full bg-[#118AB2] border-4 border-black"></div>
+            <div className="absolute -top-4 -left-4 w-full h-full bg-background border-4 border-black"></div>
             <div className="relative bg-white border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
               <div className="text-center mb-8">
                 <h1 className="text-3xl font-black">DAFTAR</h1>
@@ -90,7 +90,7 @@ export default function ModuleRegister() {
                           <Input
                             placeholder="Masukkan username Anda"
                             disabled={form.formState.isSubmitting}
-                            className={`w-full p-3 border-4 border-black focus:outline-none focus:ring-2 focus:ring-[#118AB2] h-16 rounded-[0px] ${form.formState.errors.username
+                            className={`w-full p-3 border-4 border-black  focus:outline-none focus:ring-2 focus:ring-[#118AB2] h-16 rounded-[0px] ${form.formState.errors.username
                               ? "border-red-500"
                               : ""
                               }`}
@@ -125,7 +125,7 @@ export default function ModuleRegister() {
                               type="button"
                               size="icon"
                               variant="noShadow"
-                              className="absolute right-2 top-2/4 -translate-y-1/2"
+                              className="absolute right-2 top-2/4 bg-background -translate-y-1/2"
                               onClick={() => setShowPassword(!showPassword)}
                             >
                               {showPassword ? (
@@ -145,7 +145,7 @@ export default function ModuleRegister() {
                   <Button
                     type="submit"
                     disabled={form.formState.isSubmitting}
-                    className="w-full py-3 border-4 text-black border-black font-bold text-lg h-16 rounded-[0px]  disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="w-full py-3 border-4 text-black border-black bg-background font-bold text-lg h-16 rounded-[0px]  disabled:opacity-70 disabled:cursor-not-allowed"
                   >
                     {form.formState.isSubmitting ? "Memproses..." : "Daftar"}
                   </Button>

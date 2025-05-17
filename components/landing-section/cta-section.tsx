@@ -3,12 +3,12 @@ import { ReactElement } from "react";
 
 export const CtaSection = (): ReactElement => {
   return (
-    <section className="py-16 md:py-24 bg-[#EF476F] border-b-4 border-black">
+    <section className="py-16 md:py-24 bg-background border-b-4 border-black">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
+        <h2 className="text-4xl md:text-5xl font-black  mb-6">
           Siap Untuk Mulai Bertanya?
         </h2>
-        <p className="text-xl text-white mb-8 max-w-2xl mx-auto">
+        <p className="text-xl  mb-8 max-w-2xl mx-auto">
           Bergabunglah dengan ribuan pengguna lainnya dan mulai dapatkan jawaban
           untuk semua pertanyaan Anda.
         </p>

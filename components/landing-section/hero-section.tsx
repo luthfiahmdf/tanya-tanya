@@ -8,7 +8,7 @@ export const HeroSection = (): ReactElement => {
     <section className="py-16 md:py-24 container mx-auto px-4">
       <div className="grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6">
-          <div className="inline-block bg-[#06D6A0] px-4 py-2 font-bold border-2 border-black rotate-1">
+          <div className="inline-block bg-background px-4 py-2 font-bold border-2 border-black rotate-1">
             Platform Q&A untuk Streamer
           </div>
           <h1 className="text-5xl md:text-6xl font-black leading-tight">
@@ -23,7 +23,7 @@ export const HeroSection = (): ReactElement => {
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <Link
               href="/register"
-              className="px-6 py-3 text-lg font-bold bg-[#EF476F] border-4 border-black hover:bg-[#ff5a7e] transition-colors transform hover:-translate-y-1 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-center"
+              className="px-6 py-3 text-lg font-bold bg-background border-4 border-black  transition-colors transform hover:-translate-y-1 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-center"
             >
               Mulai Bertanya
             </Link>
@@ -36,7 +36,7 @@ export const HeroSection = (): ReactElement => {
           </div>
         </div>
         <div className="relative">
-          <div className="absolute -top-6 -left-6 w-full h-full bg-[#FFD166] border-4 border-black"></div>
+          <div className="absolute -top-6 -left-6 w-full h-full bg-background border-4 border-black"></div>
           <div className="relative border-4 border-black bg-white p-6">
             <Image
               src="/tanyain-typo.png"
