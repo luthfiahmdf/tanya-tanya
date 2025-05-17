@@ -44,6 +44,9 @@ export default function QnaModule() {
       question: "",
     },
   });
+  const question = form.watch("question");
+  const textLength = question?.length;
+  console.log(textLength);
   const onSubmit = async (values: z.infer<typeof questionSchema>) => {
     // console.log(values);
     // Proses login
@@ -126,6 +129,7 @@ export default function QnaModule() {
                           <Textarea
                             placeholder="Masukkan pertanyaan Anda (maksimal 250 karakter)"
                             disabled={form.formState.isSubmitting}
+                            maxLength={250}
                             className={`w-full p-3 border-4 border-black focus:outline-none focus:ring-2 focus:ring-[#118AB2] h-56 rounded-[0px] ${form.formState.errors.question
                               ? "border-red-500"
                               : ""
@@ -133,7 +137,12 @@ export default function QnaModule() {
                             {...field}
                           />
                         </FormControl>
-                        <FormMessage />
+                        <div className="flex justify-between">
+                          <FormMessage />
+                          <span className="text-sm text-muted-foreground">
+                            {textLength || 0}/250
+                          </span>
+                        </div>
                       </FormItem>
                     )}
                   />

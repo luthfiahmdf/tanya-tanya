@@ -32,7 +32,7 @@ export function ActiveQuestions({ overlay = false, name, question, border, bgCol
       }
 
 
-      <div className=" break-all p-3" style={{
+      <div className="p-3" style={{
         color: textColor,
         fontFamily: fontFamily
       }}>
