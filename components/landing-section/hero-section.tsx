@@ -6,20 +6,17 @@ import { ReactElement } from "react";
 export const HeroSection = (): ReactElement => {
   return (
     <section className="py-16 md:py-24 container mx-auto px-4">
-      <div className="grid md:grid-cols-2 gap-12 items-center">
-        <div className="space-y-6">
+      <div className="gap-12">
+        <div className="flex flex-col items-center justify-center space-y-6">
           <div className="inline-block bg-background px-4 py-2 font-bold border-2 border-black rotate-1">
             Platform Q&A untuk Streamer
           </div>
-          <h1 className="text-5xl md:text-6xl font-black leading-tight">
-            Interaksi <br />
+          <h1 className="text-5xl md:text-6xl font-black leading-tight text-center">
+            Interaksi
             <span className="bg-[#118AB2] text-white px-2">Lebih Seru</span> <br />
             dengan Viewers
           </h1>
-          <p className="text-xl">
-            Platform Q&A yang menghubungkan streamer dengan viewers. Tampilkan pertanyaan langsung di OBS untuk
-            interaksi yang lebih menarik.
-          </p>
+
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <Link
               href="/register"
@@ -35,18 +32,7 @@ export const HeroSection = (): ReactElement => {
             </Link>
           </div>
         </div>
-        <div className="relative">
-          <div className="absolute -top-6 -left-6 w-full h-full bg-background border-4 border-black"></div>
-          <div className="relative border-4 border-black bg-white p-6">
-            <Image
-              src="/tanyain-typo.png"
-              alt="Tanya-Tanya Platform"
-              width={500}
-              height={400}
-              className="w-full h-auto"
-            />
-          </div>
-        </div>
+
       </div>
     </section>
   );
