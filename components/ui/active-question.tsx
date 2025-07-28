@@ -33,12 +33,11 @@ export function ActiveQuestions({
         }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
         transition={{
           type: 'spring',
           stiffness: 100,
           damping: 10,
-          duration: 0.5
+          duration: 0.2
         }}
         key={question} // Penting untuk animasi saat konten berubah
       >

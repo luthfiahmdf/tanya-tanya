@@ -81,7 +81,7 @@ export function Overlay() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setDisplayQuestion(question);
-    }, 500);
+    }, 200);
 
     return () => clearTimeout(timer);
   }, [question]);
@@ -90,17 +90,15 @@ export function Overlay() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <AnimatePresence mode="wait">
 
-      <ActiveQuestions
-        overlay
-        name={displayQuestion?.sender}
-        question={displayQuestion?.question}
-        bgColor={settings?.bgColor}
-        textColor={settings?.textColor}
-        border={settings?.border}
-        fontFamily={settings?.fontFamily}
-      />
-    </AnimatePresence>
+    <ActiveQuestions
+      overlay
+      name={displayQuestion?.sender}
+      question={displayQuestion?.question}
+      bgColor={settings?.bgColor}
+      textColor={settings?.textColor}
+      border={settings?.border}
+      fontFamily={settings?.fontFamily}
+    />
   );
 }
