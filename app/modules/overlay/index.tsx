@@ -1,7 +1,6 @@
 "use client";
 import { useParams } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
-import { AnimatePresence } from "framer-motion";
 import { useGetOverlay } from "../overlay/hook";
 import { ActiveQuestions } from "@/components/ui/active-question";
 import { useGetOverlaySettings } from "../setting/hook";
@@ -81,7 +80,7 @@ export function Overlay() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setDisplayQuestion(question);
-    }, 500);
+    }, 200);
 
     return () => clearTimeout(timer);
   }, [question]);
@@ -90,17 +89,15 @@ export function Overlay() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <AnimatePresence mode="wait">
 
-      <ActiveQuestions
-        overlay
-        name={displayQuestion?.sender}
-        question={displayQuestion?.question}
-        bgColor={settings?.bgColor}
-        textColor={settings?.textColor}
-        border={settings?.border}
-        fontFamily={settings?.fontFamily}
-      />
-    </AnimatePresence>
+    <ActiveQuestions
+      overlay
+      name={displayQuestion?.sender}
+      question={displayQuestion?.question}
+      bgColor={settings?.bgColor}
+      textColor={settings?.textColor}
+      border={settings?.border}
+      fontFamily={settings?.fontFamily}
+    />
   );
 }
