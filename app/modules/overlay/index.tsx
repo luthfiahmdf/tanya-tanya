@@ -44,13 +44,13 @@ export function Overlay() {
     return () => ws.close();
   }, [params?.username]);
 
-  if (!question?.question || !question?.sender) return null;
+  // if (!question?.question || !question?.sender) return null;
 
   return (
     <ActiveQuestions
       overlay
-      name={question.sender}
-      question={question.question}
+      name={question?.sender}
+      question={question?.question}
       bgColor={settings?.bgColor ?? "#fff"}
       textColor={settings?.textColor ?? "#000"}
       border={settings?.border}

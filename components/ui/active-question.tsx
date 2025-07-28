@@ -2,7 +2,7 @@
 "use client"
 
 import { User } from "lucide-react"
-
+import { motion } from "motion/react"
 type activeQuestion = {
   name?: string
   question?: string
@@ -20,7 +20,10 @@ export function ActiveQuestions({ overlay = false, name, question, border, bgCol
     <div className="border-2 border-black  p-4 " style={{
       boxShadow: border ? "8px 8px 0px 0px rgba(0,0,0,1)" : "none",
       backgroundColor: bgColor
-    }}>
+
+    }}
+
+    >
       {
         overlay ? null : (
           <div className="flex justify-between items-center mb-3">
@@ -32,10 +35,16 @@ export function ActiveQuestions({ overlay = false, name, question, border, bgCol
       }
 
 
-      <div className="p-3" style={{
+      <motion.div className="p-3" style={{
         color: textColor,
         fontFamily: fontFamily
-      }}>
+      }}
+        initial={{ scale: 0 }}
+        animate={{
+          scale: 1,
+          transition: { ease: ["easeIn", "easeOut"] }
+        }}
+      >
         <h3 className="text-lg  ">{question}</h3>
 
         <div className="flex flex-wrap items-center gap-3 mt-2 text-sm">
@@ -49,7 +58,7 @@ export function ActiveQuestions({ overlay = false, name, question, border, bgCol
           {/* </div> */}
 
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

@@ -185,7 +185,7 @@ export default function QnaModule() {
 
       <footer className="border-t-4 border-black py-4 text-center">
         <p>
-          &copy; {new Date().getFullYear()} Tanya-Tanya. Semua hak dilindungi.
+          &copy; {new Date().getFullYear()} made with ❤️ by luthfiahmdf.
         </p>
       </footer>
     </div>
