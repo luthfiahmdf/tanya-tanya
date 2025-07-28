@@ -1,7 +1,7 @@
 "use client";
 import { useParams } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { useGetOverlay } from "../overlay/hook";
 import { ActiveQuestions } from "@/components/ui/active-question";
 import { useGetOverlaySettings } from "../setting/hook";
