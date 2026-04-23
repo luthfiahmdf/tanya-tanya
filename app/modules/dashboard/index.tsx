@@ -127,7 +127,7 @@ export const ModuleDashboard = () => {
         },
       });
     },
-    [mutate, refetcOverlay],
+    [mutate, refetcOverlay, refetchQuestions],
   );
 
   const refetchData = useCallback(async () => {
