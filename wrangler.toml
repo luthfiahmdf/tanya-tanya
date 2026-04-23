@@ -1,0 +1,14 @@
+name = "tanya-tanya-websocket"
+main = "src/index.ts"
+compatibility_date = "2026-04-22"
+
+[env.development]
+vars = { ENVIRONMENT = "development" }
+
+[env.production]
+vars = { ENVIRONMENT = "production" }
+
+# WebSocket support
+[[durable_objects.bindings]]
+name = "WEBSOCKET_ROOMS"
+class_name = "WebSocketRooms"

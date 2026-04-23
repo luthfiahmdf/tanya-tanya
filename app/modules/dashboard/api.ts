@@ -1,13 +1,17 @@
 import { api } from "@/lib/axios";
-import { TQuestionResponse, TUserMeResponse } from "./type";
+import {
+  TDataDashboardResponse,
+  TQuestionResponse,
+  TUserMeResponse,
+} from "./type";
 import { TActiveOverlay } from "../overlay/type";
 
 export type TUpdateQuestion = {
   questionId: string;
 };
 export type TParamsData = {
-  id: string
-}
+  id: string;
+};
 
 export const userMe = async () => {
   const { data } = await api.get<TUserMeResponse>("users/me");
@@ -19,20 +23,16 @@ export const getQuestion = async (username: string) => {
 };
 export const updateActiveQuestion = async (
   payload: TUpdateQuestion,
-  id: string
+  id: string,
 ) => {
   const { data } = await api.put<TActiveOverlay>(
     `activeQuestions/${id}`,
-    payload
+    payload,
   );
   return data;
 };
 
-export const getDataDashboard = async (
-  id: string
-) => {
-  const { data } = await api.get<TParamsData>(
-    `dashboard/${id}`
-  )
-  return data
-}
+export const getDataDashboard = async (id: string) => {
+  const { data } = await api.get<TDataDashboardResponse>(`dashboard/${id}`);
+  return data;
+};

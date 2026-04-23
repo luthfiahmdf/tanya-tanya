@@ -1,23 +1,34 @@
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { ReactElement } from "react";
 
 export const CtaSection = (): ReactElement => {
   return (
-    <section className="py-16 md:py-24 bg-background border-b-4 border-black">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="text-4xl md:text-5xl font-black  mb-6">
-          Siap Untuk Mulai Bertanya?
-        </h2>
-        <p className="text-xl  mb-8 max-w-2xl mx-auto">
-          Bergabunglah dengan ribuan pengguna lainnya dan mulai dapatkan jawaban
-          untuk semua pertanyaan Anda.
-        </p>
-        <Link
-          href="/register"
-          className="inline-block px-8 py-4 text-xl font-bold bg-white border-4 border-black hover:bg-gray-100 transition-colors transform hover:-translate-y-1 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
-        >
-          Daftar Sekarang - Gratis!
-        </Link>
+    <section className="py-20 md:py-28 border-t-4 border-border">
+      <div className="container mx-auto px-4">
+        <div className="max-w-4xl mx-auto bg-secondary-background border-4 border-border p-10 md:p-16 shadow-[8px_8px_0px_var(--border)] text-center relative">
+          {/* Decorative corner elements */}
+          <div className="absolute -top-3 -left-3 w-6 h-6 bg-foreground border-2 border-border" />
+          <div className="absolute -top-3 -right-3 w-6 h-6 bg-foreground border-2 border-border" />
+          <div className="absolute -bottom-3 -left-3 w-6 h-6 bg-foreground border-2 border-border" />
+          <div className="absolute -bottom-3 -right-3 w-6 h-6 bg-foreground border-2 border-border" />
+
+          <h2 className="text-4xl md:text-6xl font-black text-foreground mb-6 leading-tight">
+            Siap Untuk
+            <br />
+            Mulai Bertanya?
+          </h2>
+          <p className="text-lg text-foreground/70 mb-10 max-w-xl mx-auto font-medium">
+            Bergabunglah dengan ribuan pengguna lainnya dan mulai dapatkan jawaban
+            untuk semua pertanyaan Anda.
+          </p>
+          <Link
+            href="/register"
+            className="inline-flex items-center gap-2 px-10 py-5 text-lg font-bold bg-foreground text-secondary-background border-2 border-border shadow-shadow hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none transition-all uppercase"
+          >
+            Daftar Sekarang - Gratis! <ArrowRight className="h-5 w-5" />
+          </Link>
+        </div>
       </div>
     </section>
   );

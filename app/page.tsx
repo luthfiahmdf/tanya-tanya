@@ -8,7 +8,7 @@ import { HowItWorksSection } from "@/components/landing-section/how-its-work";
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-[#FFFAF0] flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
       <main>
         <HeroSection />

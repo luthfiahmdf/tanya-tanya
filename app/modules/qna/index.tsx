@@ -10,7 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -24,8 +24,8 @@ import { useToast } from "@/components/ui/toast";
 export default function QnaModule() {
   const params = useParams<{ username: string }>();
   const { mutate } = useCreateQuestion(params.username);
-  const [send, onSend] = useState(false)
-  const { addToast } = useToast()
+  const [send, onSend] = useState(false);
+  const { addToast } = useToast();
   const questionSchema = z.object({
     name: z.string().max(20, { message: "Maksimal 20 karakter" }).optional(),
     question: z
@@ -46,23 +46,18 @@ export default function QnaModule() {
   });
   const question = form.watch("question");
   const textLength = question?.length;
-  console.log(textLength);
+
   const onSubmit = async (values: z.infer<typeof questionSchema>) => {
-    // console.log(values);
-    // Proses login
     try {
       mutate(values, {
         onSuccess: () => {
-          onSend(false)
+          onSend(false);
           form.reset();
-          addToast(`Pesannya udah dikirim yaa..`, "success")
-
+          addToast(`Pesannya udah dikirim yaa..`, "success");
         },
         onError: () => {
-          onSend(false)
-          addToast(
-            `Yaaaah kamu gagal kirim pesannya`, "error"
-          );
+          onSend(false);
+          addToast(`Yaaaah kamu gagal kirim pesannya`, "error");
         },
       });
     } catch (error) {
@@ -71,120 +66,131 @@ export default function QnaModule() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFFAF0] flex flex-col">
-      <header className="border-b-4 border-black bg-[#FFD166] p-4">
+    <div className="min-h-screen bg-background flex flex-col">
+      {/* Header */}
+      <header className="border-b-4 border-border bg-secondary-background p-4">
         <div className="container mx-auto flex items-center">
           <Link href="/" className="flex items-center gap-2">
-            <MessageCircle className="h-8 w-8" />
-            <h1 className="text-2xl font-black">TANYA-TANYA</h1>
+            <div className="bg-foreground p-1.5 border-2 border-border">
+              <MessageCircle className="h-5 w-5 text-secondary-background" />
+            </div>
+            <h1 className="text-xl font-black uppercase tracking-tight">Tanya-Tanya</h1>
           </Link>
         </div>
       </header>
 
+      {/* Main */}
       <main className="flex-1 flex items-center justify-center p-4 md:p-8">
         <div className="w-full max-w-md">
-          <div className="relative">
-            <div className="absolute -top-4 -left-4 w-full h-full bg-[#06D6A0] border-4 border-black"></div>
-            <div className="relative bg-white border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-              <div className="text-center mb-8">
-                <h1 className="text-3xl font-black">
-                  Tanyain {params.username} Yuk
-                </h1>
-              </div>
-
-              <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-6"
-                >
-                  {/* Username */}
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-base">Nama</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Masukkan nama Anda (opsional)"
-                            disabled={form.formState.isSubmitting}
-                            className={`w-full p-3 border-4 border-black focus:outline-none focus:ring-2 focus:ring-[#118AB2] h-16 rounded-[0px] ${form.formState.errors.name ? "border-red-500" : ""
-                              }`}
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* Password */}
-                  <FormField
-                    control={form.control}
-                    name="question"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-base">Pesan</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Masukkan pertanyaan Anda (maksimal 250 karakter)"
-                            disabled={form.formState.isSubmitting}
-                            maxLength={250}
-                            className={`w-full p-3 border-4 border-black focus:outline-none focus:ring-2 focus:ring-[#118AB2] h-56 rounded-[0px] ${form.formState.errors.question
-                              ? "border-red-500"
-                              : ""
-                              }`}
-                            {...field}
-                          />
-                        </FormControl>
-                        <div className="flex justify-between">
-                          <FormMessage />
-                          <span className="text-sm text-muted-foreground">
-                            {textLength || 0}/250
-                          </span>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* Submit Button */}
-
-
-                  <Dialog open={send} onOpenChange={onSend} >
-                    <DialogTrigger asChild>
-                      <Button className="w-full h-16 text-black font-bold text-lg">Kirim Pesan</Button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-[425px]">
-                      <DialogHeader>
-                        <DialogTitle>Kirim Pesan</DialogTitle>
-                        <DialogDescription>
-                          Yakin nih mau dikirim pesannya ?
-                        </DialogDescription>
-                      </DialogHeader>
-
-                      <DialogFooter className="flex flex-row">
-                        <DialogClose asChild>
-                          <Button variant="neutral" className="w-full">Gajadi</Button>
-                        </DialogClose>
-                        <Button type="submit" className="w-full" onClick={() => {
-                          onSend(false)
-                          form.handleSubmit(onSubmit)()
-                        }}>Kirim</Button>
-                      </DialogFooter>
-                    </DialogContent>
-                  </Dialog>
-
-
-                  {/* Register link */}
-                </form>
-              </Form>
+          <div className="bg-secondary-background border-2 border-border p-8 md:p-10 shadow-[6px_6px_0px_var(--border)]">
+            {/* Title */}
+            <div className="mb-8">
+              <h1 className="text-2xl font-black uppercase">
+                Tanyain {params.username}
+              </h1>
+              <p className="mt-1 text-foreground/60 font-medium text-sm">
+                Kirim pertanyaan atau pesan anonim
+              </p>
             </div>
+
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+                {/* Name */}
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-bold uppercase">
+                        Nama <span className="text-foreground/40 normal-case font-medium">(opsional)</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Masukkan nama kamu"
+                          disabled={form.formState.isSubmitting}
+                          className={`w-full p-3 border-2 border-border focus:outline-none focus:ring-2 focus:ring-foreground h-12 rounded-[0px] font-medium ${
+                            form.formState.errors.name ? "border-red-500" : ""
+                          }`}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Question */}
+                <FormField
+                  control={form.control}
+                  name="question"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-bold uppercase">Pesan</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Tulis pertanyaan atau pesan kamu..."
+                          disabled={form.formState.isSubmitting}
+                          maxLength={250}
+                          className={`w-full p-3 border-2 border-border focus:outline-none focus:ring-2 focus:ring-foreground h-40 rounded-[0px] font-medium resize-none ${
+                            form.formState.errors.question ? "border-red-500" : ""
+                          }`}
+                          {...field}
+                        />
+                      </FormControl>
+                      <div className="flex justify-between">
+                        <FormMessage />
+                        <span className={`text-xs font-bold ${(textLength || 0) >= 230 ? "text-red-500" : "text-foreground/40"}`}>
+                          {textLength || 0}/250
+                        </span>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+
+                {/* Submit */}
+                <Dialog open={send} onOpenChange={onSend}>
+                  <DialogTrigger asChild>
+                    <button
+                      type="button"
+                      className="w-full py-3 bg-foreground text-secondary-background border-2 border-border font-bold text-sm uppercase shadow-shadow hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none transition-all flex items-center justify-center gap-2"
+                    >
+                      <Send className="h-4 w-4" />
+                      Kirim Pesan
+                    </button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                      <DialogTitle>Kirim Pesan</DialogTitle>
+                      <DialogDescription>
+                        Yakin nih mau dikirim pesannya?
+                      </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter className="flex flex-row">
+                      <DialogClose asChild>
+                        <Button variant="neutral" className="w-full">Gajadi</Button>
+                      </DialogClose>
+                      <Button
+                        type="submit"
+                        className="w-full"
+                        onClick={() => {
+                          onSend(false);
+                          form.handleSubmit(onSubmit)();
+                        }}
+                      >
+                        Kirim
+                      </Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+              </form>
+            </Form>
           </div>
         </div>
       </main>
 
-      <footer className="border-t-4 border-black py-4 text-center">
-        <p>
+      {/* Footer */}
+      <footer className="border-t-4 border-border bg-foreground py-4 text-center">
+        <p className="text-secondary-background/70 text-sm">
           &copy; {new Date().getFullYear()} made with ❤️ by luthfiahmdf.
         </p>
       </footer>

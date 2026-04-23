@@ -1,29 +1,252 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
-:root {
-  --background: oklch(93.46% 0.0305 255.11);
-  --secondary-background: oklch(100% 0 0);
-  --foreground: oklch(0% 0 0);
-  --main-foreground: oklch(0% 0 0);
-  --main: oklch(67.47% 0.1726 259.49);
-  --border: oklch(0% 0 0);
-  --ring: oklch(0% 0 0);
-  --overlay: oklch(0% 0 0 / 0.8);
-  --shadow: 4px 4px 0px 0px var(--border);
+/* Smooth transitions for theme switching */
+*,
+*::before,
+*::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.dark {
-  --background: oklch(29.23% 0.0626 270.49);
-  --secondary-background: oklch(23.93% 0 0);
-  --foreground: oklch(92.49% 0 0);
-  --main-foreground: oklch(0% 0 0);
-  --main: oklch(67.47% 0.1726 259.49);
-  --border: oklch(0% 0 0);
-  --ring: oklch(100% 0 0);
+/* ===== DEFAULT THEME: Monochrome Light ===== */
+:root,
+.monochrome-light {
+  --background: #F5F5F5;
+  --secondary-background: #FFFFFF;
+  --foreground: #000000;
+  --main-foreground: #000000;
+  --main: #F5F5F5;
+  --border: #000000;
+  --ring: #000000;
+  --overlay: rgba(0, 0, 0, 0.5);
   --shadow: 4px 4px 0px 0px var(--border);
+  --accent: #F59E0B;
+  --muted: #6b7280;
+}
+
+/* ===== THEME: Monochrome Dark ===== */
+.monochrome-dark {
+  --background: #1a1a1a;
+  --secondary-background: #262626;
+  --foreground: #e5e5e5;
+  --main-foreground: #e5e5e5;
+  --main: #262626;
+  --border: #e5e5e5;
+  --ring: #e5e5e5;
+  --overlay: rgba(0, 0, 0, 0.7);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --accent: #F59E0B;
+  --muted: #a3a3a3;
+}
+
+/* ===== THEME: Supabase ===== */
+.supabase {
+  --background: #F0FDF4;
+  --secondary-background: #FFFFFF;
+  --foreground: #1E3A32;
+  --main-foreground: #1E3A32;
+  --main: #F0FDF4;
+  --border: #1E3A32;
+  --ring: #1E3A32;
+  --overlay: rgba(30, 58, 50, 0.5);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --accent: #3ECF8E;
+  --muted: #6B7280;
+}
+
+/* ===== THEME: CL4ude ===== */
+.claude {
+  --background: #F4EDE4;
+  --secondary-background: #FFFAF5;
+  --foreground: #5A3825;
+  --main-foreground: #5A3825;
+  --main: #F4EDE4;
+  --border: #5A3825;
+  --ring: #5A3825;
+  --overlay: rgba(90, 56, 37, 0.5);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --accent: #CC785C;
+  --muted: #8B7355;
+}
+
+/* ===== THEME: Vercel ===== */
+.vercel {
+  --background: #FAFAFA;
+  --secondary-background: #FFFFFF;
+  --foreground: #000000;
+  --main-foreground: #000000;
+  --main: #FAFAFA;
+  --border: #000000;
+  --ring: #000000;
+  --overlay: rgba(0, 0, 0, 0.5);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --accent: #0070F3;
+  --muted: #666666;
+}
+
+/* ===== THEME: GitHub ===== */
+.github {
+  --background: #F6F8FA;
+  --secondary-background: #FFFFFF;
+  --foreground: #24292F;
+  --main-foreground: #24292F;
+  --main: #F6F8FA;
+  --border: #24292F;
+  --ring: #24292F;
+  --overlay: rgba(36, 41, 47, 0.5);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --accent: #8957E5;
+  --muted: #656D76;
+}
+
+/* ===== THEME: Stripe ===== */
+.stripe {
+  --background: #F6F9FC;
+  --secondary-background: #FFFFFF;
+  --foreground: #0A2540;
+  --main-foreground: #0A2540;
+  --main: #F6F9FC;
+  --border: #0A2540;
+  --ring: #0A2540;
+  --overlay: rgba(10, 37, 64, 0.5);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --accent: #635BFF;
+  --muted: #425466;
+}
+
+/* ===== THEME: Linear ===== */
+.linear {
+  --background: #F7F8F9;
+  --secondary-background: #FFFFFF;
+  --foreground: #16181D;
+  --main-foreground: #16181D;
+  --main: #F7F8F9;
+  --border: #16181D;
+  --ring: #16181D;
+  --overlay: rgba(22, 24, 29, 0.5);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --accent: #5E6AD2;
+  --muted: #6B6F76;
+}
+
+/* ===== THEME: Notion ===== */
+.notion {
+  --background: #F7F6F3;
+  --secondary-background: #FFFFFF;
+  --foreground: #37352F;
+  --main-foreground: #37352F;
+  --main: #F7F6F3;
+  --border: #37352F;
+  --ring: #37352F;
+  --overlay: rgba(55, 53, 47, 0.5);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --accent: #EB5757;
+  --muted: #787774;
+}
+
+/* ===== THEME: Dracula ===== */
+.dracula {
+  --background: #282A36;
+  --secondary-background: #44475A;
+  --foreground: #F8F8F2;
+  --main-foreground: #F8F8F2;
+  --main: #282A36;
+  --border: #F8F8F2;
+  --ring: #F8F8F2;
+  --overlay: rgba(40, 42, 54, 0.7);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --accent: #BD93F9;
+  --muted: #6272A4;
+}
+
+/* ===== THEME: Tailwind ===== */
+.tailwind {
+  --background: #F1F5F9;
+  --secondary-background: #FFFFFF;
+  --foreground: #0F172A;
+  --main-foreground: #0F172A;
+  --main: #F1F5F9;
+  --border: #0F172A;
+  --ring: #0F172A;
+  --overlay: rgba(15, 23, 42, 0.5);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --accent: #06B6D4;
+  --muted: #64748B;
+}
+
+/* ===== THEME: Raycast ===== */
+.raycast {
+  --background: #1A1A1E;
+  --secondary-background: #252528;
+  --foreground: #ECECEC;
+  --main-foreground: #ECECEC;
+  --main: #1A1A1E;
+  --border: #ECECEC;
+  --ring: #ECECEC;
+  --overlay: rgba(26, 26, 30, 0.7);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --accent: #FF6363;
+  --muted: #929292;
+}
+
+/* ===== THEME: Figma ===== */
+.figma {
+  --background: #F5F5F5;
+  --secondary-background: #FFFFFF;
+  --foreground: #1E1E1E;
+  --main-foreground: #1E1E1E;
+  --main: #F5F5F5;
+  --border: #1E1E1E;
+  --ring: #1E1E1E;
+  --overlay: rgba(30, 30, 30, 0.5);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --accent: #A259FF;
+  --muted: #6B6B6B;
+}
+
+/* ===== THEME: Slack ===== */
+.slack {
+  --background: #FFFFFF;
+  --secondary-background: #F8F8F8;
+  --foreground: #1D1C1D;
+  --main-foreground: #1D1C1D;
+  --main: #FFFFFF;
+  --border: #1D1C1D;
+  --ring: #1D1C1D;
+  --overlay: rgba(29, 28, 29, 0.5);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --accent: #611F69;
+  --muted: #616061;
+}
+
+/* ===== THEME: Twitter ===== */
+.twitter {
+  --background: #FFFFFF;
+  --secondary-background: #F7F9F9;
+  --foreground: #0F1419;
+  --main-foreground: #0F1419;
+  --main: #FFFFFF;
+  --border: #0F1419;
+  --ring: #0F1419;
+  --overlay: rgba(15, 20, 25, 0.5);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --accent: #1D9BF0;
+  --muted: #536471;
+}
+
+/* ===== THEME: Arc ===== */
+.arc {
+  --background: #F5F0EB;
+  --secondary-background: #FFFFFF;
+  --foreground: #1A1A2E;
+  --main-foreground: #1A1A2E;
+  --main: #F5F0EB;
+  --border: #1A1A2E;
+  --ring: #1A1A2E;
+  --overlay: rgba(26, 26, 46, 0.5);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --accent: #5B8DEF;
+  --muted: #7A7A8E;
 }
 
 @theme inline {
@@ -35,6 +258,8 @@
   --color-border: var(--border);
   --color-overlay: var(--overlay);
   --color-ring: var(--ring);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
 
   --spacing-boxShadowX: 4px;
   --spacing-boxShadowY: 4px;
@@ -44,18 +269,4 @@
   --shadow-shadow: var(--shadow);
   --font-weight-base: 500;
   --font-weight-heading: 700;
-}
-
-@keyframes toastProgress {
-  from {
-    width: 100%;
-  }
-
-  to {
-    width: 0%;
-  }
-}
-
-.animate-toastProgress {
-  animation: toastProgress 2s linear forwards;
 }
