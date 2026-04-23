@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { User, Save, AlertCircle } from "lucide-react";
+import { User, Save } from "lucide-react";
 import { HexColorPicker, HexColorInput } from "react-colorful";
 import { useGetUserMe } from "../dashboard/hook";
 import { useGetOverlaySettings, useUpdateOverlaySettings } from "./hook";
