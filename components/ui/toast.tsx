@@ -1,8 +1,8 @@
-
 "use client"
 
 import { createContext, useState, useContext, ReactNode, useEffect } from "react"
 import clsx from "clsx"
+import { CheckCircle, AlertCircle, Info, AlertTriangle } from "lucide-react"
 
 type ToastType = "info" | "success" | "warning" | "error"
 
@@ -11,6 +11,13 @@ interface ToastContextType {
 }
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined)
+
+const toastIcons: Record<ToastType, React.ReactNode> = {
+  info: <Info className="h-4 w-4 shrink-0" />,
+  success: <CheckCircle className="h-4 w-4 shrink-0" />,
+  warning: <AlertTriangle className="h-4 w-4 shrink-0" />,
+  error: <AlertCircle className="h-4 w-4 shrink-0" />,
+}
 
 const Toast: React.FC<{
   message: string
@@ -34,30 +41,26 @@ const Toast: React.FC<{
     }
   }, [onDismiss])
 
-  const backgroundColors: Record<ToastType, string> = {
-    info: "bg-[#dbeafe]",
-    success: "bg-[#bbf7d0]",
-    warning: "bg-[#fef9c3]",
-    error: "bg-[#fecaca]"
-  }
-
   return (
     <div
       className={clsx(
-        "flex flex-col items-start w-[360px] p-3 rounded-md border-2 text-black font-bold",
+        "flex items-center gap-3 w-[360px] p-4 border-2 border-border bg-secondary-background text-foreground font-bold text-sm",
         "transition-all duration-300 ease-out",
-        "border-black shadow-[6px_6px_0px_black]",
-        backgroundColors[type],
+        "shadow-shadow",
         {
           "opacity-0 -translate-y-4": state === "exit",
-          "opacity-100 translate-y-0": state === "enter"
+          "opacity-100 translate-y-0": state === "enter",
         }
       )}
     >
-      <div className="w-full">{message}</div>
-      <div className="relative w-full h-1 bg-slate-500 mt-2 overflow-hidden rounded-full">
-        <div className="absolute left-0 top-0 h-full bg-white animate-toastProgress" />
-      </div>
+      {toastIcons[type]}
+      <div className="flex-1">{message}</div>
+      <button
+        onClick={onDismiss}
+        className="text-foreground font-black hover:opacity-60 transition-opacity text-xs"
+      >
+        X
+      </button>
     </div>
   )
 }
@@ -95,4 +98,3 @@ const useToast = () => {
 }
 
 export { ToastProvider, useToast }
-

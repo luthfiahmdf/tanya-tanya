@@ -20,8 +20,8 @@ export function Overlay() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const { data: initialData } = useGetOverlay(username || '');
-  const { data: settings } = useGetOverlaySettings(username || '');
+  const { data: initialData } = useGetOverlay(username || "");
+  const { data: settings } = useGetOverlaySettings(username || "");
 
   // Handle initial data and WebSocket updates
   useEffect(() => {
@@ -39,7 +39,7 @@ export function Overlay() {
     // WebSocket connection
     const setupWebSocket = () => {
       try {
-        const wsUrl = `${process.env.NEXT_PUBLIC_WS_URL}/${username}`;
+        const wsUrl = `${process.env.NEXT_PUBLIC_WS_URL}/overlay/${username}`;
         wsRef.current = new WebSocket(wsUrl);
 
         wsRef.current.onmessage = (event) => {
@@ -89,7 +89,6 @@ export function Overlay() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-
     <ActiveQuestions
       overlay
       name={displayQuestion?.sender}

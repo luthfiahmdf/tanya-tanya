@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 import { SettingModule } from "@/app/modules/setting";
 
 const SettingPage: NextPage = (): ReactElement => (
-  <section key="setting-section" className="min-h-screen bg-[#FFFAF0]">
+  <section key="setting-section" className="min-h-screen bg-[#F5F5F5]">
     <SettingModule />
   </section>
 );
