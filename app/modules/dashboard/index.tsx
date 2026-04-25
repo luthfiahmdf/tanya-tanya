@@ -455,70 +455,81 @@ export const ModuleDashboard = () => {
                     </div>
 
                     {/* Pagination */}
-                    {finalQuestionData.length > ITEMS_PER_PAGE && (
-                      <div className="flex items-center justify-between mt-6 pt-6 border-t-2 border-border">
-                        <p className="text-xs font-bold text-foreground/60 uppercase">
-                          {(currentPage - 1) * ITEMS_PER_PAGE + 1}-
-                          {Math.min(
-                            currentPage * ITEMS_PER_PAGE,
-                            finalQuestionData.length,
-                          )}{" "}
-                          dari {finalQuestionData.length}
-                        </p>
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={() =>
-                              setCurrentPage((p) => Math.max(1, p - 1))
-                            }
-                            disabled={currentPage === 1}
-                            className="p-2 border-2 border-border bg-secondary-background text-foreground font-bold shadow-[2px_2px_0px_var(--border)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all disabled:opacity-30 disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-[2px_2px_0px_var(--border)]"
-                          >
-                            <ChevronLeft className="h-4 w-4" />
-                          </button>
-                          {Array.from(
-                            {
-                              length: Math.ceil(
-                                finalQuestionData.length / ITEMS_PER_PAGE,
-                              ),
-                            },
-                            (_, i) => i + 1,
-                          ).map((page) => (
+                    {finalQuestionData.length > ITEMS_PER_PAGE && (() => {
+                      const totalPages = Math.ceil(finalQuestionData.length / ITEMS_PER_PAGE);
+                      const getPageNumbers = () => {
+                        const pages: (number | "...")[] = [];
+                        if (totalPages <= 7) {
+                          for (let i = 1; i <= totalPages; i++) pages.push(i);
+                        } else {
+                          pages.push(1);
+                          if (currentPage > 3) pages.push("...");
+                          const start = Math.max(2, currentPage - 1);
+                          const end = Math.min(totalPages - 1, currentPage + 1);
+                          for (let i = start; i <= end; i++) pages.push(i);
+                          if (currentPage < totalPages - 2) pages.push("...");
+                          pages.push(totalPages);
+                        }
+                        return pages;
+                      };
+
+                      return (
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 pt-6 border-t-2 border-border">
+                          <p className="text-xs font-bold text-foreground/60 uppercase">
+                            {(currentPage - 1) * ITEMS_PER_PAGE + 1}-
+                            {Math.min(
+                              currentPage * ITEMS_PER_PAGE,
+                              finalQuestionData.length,
+                            )}{" "}
+                            dari {finalQuestionData.length}
+                          </p>
+                          <div className="flex items-center gap-2">
                             <button
-                              key={page}
-                              onClick={() => setCurrentPage(page)}
-                              className={`w-9 h-9 border-2 border-border font-black text-xs transition-all ${
-                                currentPage === page
-                                  ? "bg-foreground text-secondary-background shadow-none"
-                                  : "bg-secondary-background text-foreground shadow-[2px_2px_0px_var(--border)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none"
-                              }`}
+                              onClick={() =>
+                                setCurrentPage((p) => Math.max(1, p - 1))
+                              }
+                              disabled={currentPage === 1}
+                              className="p-2 border-2 border-border bg-secondary-background text-foreground font-bold shadow-[2px_2px_0px_var(--border)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all disabled:opacity-30 disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-[2px_2px_0px_var(--border)]"
                             >
-                              {page}
+                              <ChevronLeft className="h-4 w-4" />
                             </button>
-                          ))}
-                          <button
-                            onClick={() =>
-                              setCurrentPage((p) =>
-                                Math.min(
-                                  Math.ceil(
-                                    finalQuestionData.length / ITEMS_PER_PAGE,
-                                  ),
-                                  p + 1,
-                                ),
-                              )
-                            }
-                            disabled={
-                              currentPage ===
-                              Math.ceil(
-                                finalQuestionData.length / ITEMS_PER_PAGE,
-                              )
-                            }
-                            className="p-2 border-2 border-border bg-secondary-background text-foreground font-bold shadow-[2px_2px_0px_var(--border)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all disabled:opacity-30 disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-[2px_2px_0px_var(--border)]"
-                          >
-                            <ChevronRight className="h-4 w-4" />
-                          </button>
+                            {getPageNumbers().map((page, idx) =>
+                              page === "..." ? (
+                                <span
+                                  key={`ellipsis-${idx}`}
+                                  className="w-9 h-9 flex items-center justify-center text-foreground/40 font-black text-xs"
+                                >
+                                  ...
+                                </span>
+                              ) : (
+                                <button
+                                  key={page}
+                                  onClick={() => setCurrentPage(page)}
+                                  className={`w-9 h-9 border-2 border-border font-black text-xs transition-all ${
+                                    currentPage === page
+                                      ? "bg-foreground text-secondary-background shadow-none"
+                                      : "bg-secondary-background text-foreground shadow-[2px_2px_0px_var(--border)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none"
+                                  }`}
+                                >
+                                  {page}
+                                </button>
+                              ),
+                            )}
+                            <button
+                              onClick={() =>
+                                setCurrentPage((p) =>
+                                  Math.min(totalPages, p + 1),
+                                )
+                              }
+                              disabled={currentPage === totalPages}
+                              className="p-2 border-2 border-border bg-secondary-background text-foreground font-bold shadow-[2px_2px_0px_var(--border)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all disabled:opacity-30 disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-[2px_2px_0px_var(--border)]"
+                            >
+                              <ChevronRight className="h-4 w-4" />
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      );
+                    })()}
                   </>
                 ) : (
                   <div className="text-center py-16 bg-background border-2 border-dashed border-border">
